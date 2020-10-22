@@ -10,9 +10,13 @@
     <h1>{{ title }}</h1>
     <button class="btn btn-primary">Button</button>
     {{ info }}
-    {{ if user }}
+    {{ if currentUser  }}
         <h3>111</h3>
-        <h4>{{ user.email }}</h4>
+        <h4>{{ currentUser.email }}</h4>
     {{ /if }}
+    
+    <a href="/register"><button>register</button></a>
+    <a href="/login"><button>login</button></a>
+    <a href="/logout"><button>logout</button></a>
 </body>
 </html>

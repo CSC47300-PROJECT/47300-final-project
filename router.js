@@ -3,7 +3,7 @@ const passport = require('passport')
 const dotenv = require('dotenv')
 const session = require('express-session')
 const cookieParser = require('cookie-parser')
-const flash = require('express-flash')
+const flash = require('connect-flash')
 // .env setup
 dotenv.config()
 const sgMail = require('@sendgrid/mail')
@@ -20,9 +20,10 @@ router.use(cookieParser('cats'))
 
 // set session
 router.use(session({
+    name: 'name of keyboard cat',
     secret: 'top secret',
     resave: false,
-    saveUninitialized: true
+    saveUninitialized: false,
 }));
 
 // express-flash
@@ -36,12 +37,21 @@ passport.use(User.createStrategy());
 passport.serializeUser(User.serializeUser()); 
 passport.deserializeUser(User.deserializeUser()); 
 
+// flash message, currentUser middleware
+router.use((req, res, next) => {
+  res.locals.currentUser = req.user
+  if (req.session.flash) {
+    res.locals.flash = req.session.flash
+    delete req.session.flash
+  }
+  next()
+});
+
 // home page
 router.get('/', (req, res) => {
     console.log('req.user', req.user)
     res.render('index.html', {
-        title: 'Hello World',
-        user: req.user
+        title: 'Hello World'
     })
 })
 
@@ -70,11 +80,11 @@ router.post('/register', (req, res) => {
         sgMail.send({
             to:       user.email,
             from:     'yifengjin68@gmail.com',
-            subject:  'Confirm your email',
-            html:     '<a target=_blank href=\"' + authenticationURL + '\">Confirm your email</a>'
+            subject:  'Confirm 47300 OnlineShopping Mall email',
+            html:     '<h3>Thank you for registering with us! <a target=_blank href=\"' + authenticationURL + '\">Click here!</a> to confirm your email!'
             }, function(err, json) {
             if (err) { return console.error(err); }
-            console.log('sent email')
+            req.session.flash = { type:'success', text:'Sent Email Successfully!' }
             res.redirect('/email-verification');
         });
     });
@@ -84,11 +94,10 @@ router.post('/register', (req, res) => {
 router.get('/verify', (req, res) => {
     User.verifyEmail(req.query.authToken, function (err, existingAuthToken) {
         if (err) {
-            console.log('err', err);
+          console.log('err', err);
         } else {
-            res.render('email-verification.html', {
-                title: 'Email verified successfully!'
-            });
+          req.session.flash = { type: 'success', text: 'Email verified successfully!' }
+          res.render('email-verification.html');
         }
     });
 });   
@@ -105,37 +114,106 @@ router.get('/unauthorized', (req, res) => {
     });
 });
 
-// TODO: login function
+// login function
 router.post("/login", function (req, res, next) {
     passport.authenticate("local", function (err, user) {
       if (err) {
-        req.flash("error", err.message);
+        req.session.flash = { type: 'danger', text: err.message }
         return next(err);
       }
       if (!user) {
-        req.flash("error", "Login failed");
-        console.log('not user')
-        // If login failed, we still need the original URL, so retrive from req.session
-        return res.redirect('/login');
+        req.session.flash = { type: 'danger', text: 'Email or Password is Incorrect, Please Try Agian'}
+        res.redirect('/login');
       }
       req.logIn(user, function (err) {
         if (err) {
-          req.flash("error", err.message);
+          req.session.flash = { type: 'danger', text: err.message }
           return next(err);
         }
-        req.flash("success", "Login Successful!");
         res.redirect('/');
       });
     })(req, res, next);
   });
 
+// forget password page
+router.get('/forget-password', (req, res) => {
+    res.render("forget-password.html");
+  });
+
+// send forget password email verification
+router.post('/forget-password-email', (req, res) => {
+    User.findOne({ email: req.body.email }, (err, user) => {
+        if (err) {
+          req.session.flash = { type: 'danger', text: err.message }
+          res.redirect('back');
+        } else {
+          if (!user) {
+            req.session.flash = { type: 'danger', text: 'Email does not exist!' }
+            res.redirect('back');
+          } else {
+            var authenticationResetURL = 'http://localhost:5000/reset-password/verify?authToken=' + user.authToken;
+            sgMail.send({
+              to:       user.email,
+              from:     'yifengjin68@gmail.com',
+              subject:  'Reset 47300 OnlineShopping Mall Password',
+              html:     '<h3>You are receiving this email because you or someone else has requested a password reset for 47300 OnlineShopping Mall account <a target=_blank href=\"' + authenticationResetURL + '\">Click here!</a> to reset your password.'
+            }, function(err, json) {
+              if (err) { return console.error(err); }
+                req.session.flash = { type: 'success', text:'Sent email successfully!' }
+                res.redirect('/email-verification');
+              });
+          }
+        }
+    })
+});
+
+// reset password page
+router.get("/reset-password/verify", function (req, res) {
+    User.findOne({ authToken: req.query.authToken }, (err, user) => {
+        if (err) {
+          req.session.flash = {type: 'danger', text: err.message }
+          res.redirect("back");
+        } else {
+          if (!user.authToken) {
+            req.session.flash = {type: 'danger', text: "Error, Please Login First" }
+            res.redirect("/login");
+          } else {
+            res.render("reset-password.html", {
+              user: user,
+            });
+          }
+        }
+      }
+    );
+});
+
+// reset password function
+router.post("/reset-password", function (req, res) {
+    User.findOne({ _id: req.body.id }, (err, user) => {
+        if (!user) {
+          req.session.flash = { type: 'danger', text: "User donsn't exist" }
+          res.redirect("back");
+        } else {
+          user.setPassword(req.body.password, function (err) {
+            if (err) {
+              req.session.flash = { type: 'danger', text: "Reset Password Failed! Please Try Agian" }
+              res.redirect("back");
+            } else {
+              req.session.flash = { type: 'success', text: "Reset Password Successfully! Plase Login" }
+              user.save();
+              res.redirect("/login");
+            }
+          });
+        }
+      }
+    );
+});
 
 // logout function
 router.get('/logout', (req, res) => {
     req.logout();
     res.redirect('/');
 });
-
 
 // export module
 module.exports = router
