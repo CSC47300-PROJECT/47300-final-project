@@ -2,3 +2,5 @@
 #### Jiande Li
 #### Yifeng Jin
 #### Haibin Mai
+
+# Installation: npm install
