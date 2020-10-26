@@ -14,7 +14,6 @@ const router = express.Router();
 
 // importing User Schema
 const User = require('./models/user')
-const user = require('./models/user')
 
 // cookie parser
 router.use(cookieParser('cats'))
