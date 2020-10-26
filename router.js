@@ -98,7 +98,7 @@ router.get('/verify', (req, res) => {
           console.log('err', err);
         } else {
           req.session.flash = { type: 'success', text: 'Email verified successfully!' }
-          res.render('email-verification.html');
+          res.redirect('/email-verification');
         }
     });
 });   
@@ -216,6 +216,12 @@ router.get('/logout', (req, res) => {
     req.logout();
     res.redirect('/');
 });
+
+// product page
+router.get('/products', (req, res) => {
+  res.render('products.html');    
+});
+
 
 // export module
 module.exports = router
