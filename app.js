@@ -1,8 +1,8 @@
 const express = require('express')
 const bodyParser = require('body-parser')
-const passport = require('passport')
-const flash = require('express-flash')
-const session = require('express-session')
+// const passport = require('passport')
+// const flash = require('express-flash')
+// const session = require('express-session')
 const multer = require('multer');
 const GridFsStorage = require("multer-gridfs-storage");
 const path = require('path')
@@ -13,8 +13,8 @@ const favicon = require('serve-favicon')
 // create server
 const app = express(); 
 
-// models - User
-const User = require('./models/user')
+// LocalStrategy
+const LocalStrategy = require('passport-local').Strategy;
 
 // require router.js
 const router = require('./router')
@@ -34,8 +34,9 @@ app.use('/node_modules/', express.static(__dirname + '/node_modules'))
 
 app.use(cors());
 
-// flash message
-// app.use(flash());
+// models - User
+// const User = require('./models/user')
+
 
 // calling router.js
 app.use(router)
