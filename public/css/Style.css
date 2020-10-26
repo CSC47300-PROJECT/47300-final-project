@@ -133,12 +133,12 @@ transition: 0.5s ;
     margin: 15px 10px 15px 0;
 }
 /* the checkbox text */
-span{
+/* span{
     color:rgb(109, 109, 109);
     font-size: 12px;
     bottom:68px;
     padding-top:13px ;
-}
+} */
 
 /* for all teh information box style */
 #login{
@@ -208,7 +208,7 @@ span{
       
 }
 
-
+/* The line in the product title bottom */
 .products-box h1::after{
     content:'';
     background: -webkit-linear-gradient( #06c5ff,#10ffc3);
@@ -221,6 +221,8 @@ span{
     left:50%;
     transform: translateX(-50%);
 } 
+
+
 .products-box .col-4{
     /* flex-basis: 25%; */
     padding: 10px;
@@ -235,3 +237,4 @@ span{
     margin-left: auto;
     margin-right: auto;
 }
+

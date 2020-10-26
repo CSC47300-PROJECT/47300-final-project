@@ -19,11 +19,7 @@
 <body>
     <!-- <h1>{{ title }}</h1>-->
     <button class="btn btn-primary">Button</button>
-    {{ info }}
-    {{ if currentUser  }}
-        <h3>111</h3>
-        <h4>{{ currentUser.email }}</h4>
-    {{ /if }} 
+   
     
     <header>
       <!-- title -->
@@ -35,11 +31,22 @@
                 <div class="col-md-4 col-sm-12 text-center"> </div>
                 <div class="col-md-4 col-sm-12 right">
                     <div class = "signup-login">
+                      <span id="userInfo">
+                        {{ info }}
+                        {{ if currentUser  }}
+                            <h6>Hello,{{ currentUser.email }}</h6>
+                        {{else}}
                         <a href="./register">Register </a>
                         /
                         <a href="./login"> Login</a>
-						/
-						<a href="./logout"> Logout</a>
+                        /
+                        {{ /if }} 
+
+                      </span>
+
+						            <a href="./logout"> Logout</a>
+                      
+                        
                     </div>
                 </div>
             </div>
