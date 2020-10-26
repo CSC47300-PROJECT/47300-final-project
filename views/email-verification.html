@@ -13,7 +13,7 @@
     <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     <link rel="stylesheet" type="text/css" href="css/style.css" />
     <!-- <link rel="stylesheet" type="text/css" href="/public/css/Style.css" /> -->
-    <title>Document</title>
+    <title>email-verification</title>
 </head>
 <body>
     
@@ -89,10 +89,11 @@
               <button type="button" class="close" data-dismiss="alert" onclick="$('.flash').hide();">&times;</button>
               {{ flash.text }}
           </div>
-          {{ if flash.text == 'Email verified successfully!'}}
-          <a href="/login"><button type= "submit" class = "submit-btn" style="width: 300px;">Login</button></a>
+              {{ if flash.text == 'Email verified successfully!'}}
+              <a href="/login"><button type= "submit" class = "submit-btn" style="width: 300px;">Login</button></a>
+              {{ /if }}
           {{ /if }}
-         
+          
         </div>
 </body>
 </html>

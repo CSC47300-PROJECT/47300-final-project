@@ -85,9 +85,12 @@
         <button type="submit">submit</button>
     </form> -->
     <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! signup box !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
+   
         <div class ="container d-flex justify-content-center">
+          <span style="font-weight:bold; color:red">{{ info }}</span> 
             <form id = "register" class="input-group" action="/register" method="POST">
-                <h1>Register</h1>
+               
+              <h1>Register</h1>
                 <input type="text"  name="email" class="input-field" name="email" placeholder = "Email" required>
                 <input type="password" name="password" id="password" class="input-field" placeholder = "Password" required onkeyup= "check();" />
                 <input type="password" id="confirm-password" class="input-field" name="comfirm-password" placeholder = "Comfirm Password" required onkeyup= "check();" />
@@ -95,7 +98,7 @@
                 <!-- <input type="checkbox" class="check-box" > -->
                 <!-- <span>Remeber Password</span> -->
                 <span id="message" style="font-weight:bold;"></span>
-                <span style="font-weight:bold; color:red">{{ info }}</span>
+                
                 <button type= "submit" class = "submit-btn" value="checkpassword()">Submit</button>
                 <!-- <div class="social-icons">
                     <i class="fab fa-google"></i>
