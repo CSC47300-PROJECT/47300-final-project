@@ -14,6 +14,9 @@
         <button type="button" class="close" data-dismiss="alert" onclick="$('.flash').hide();">&times;</button>
         {{ flash.text }}
     </div>
+        {{ if flash.text == 'Email verified successfully!'}}
+        <a href="/login"><button>login</button></a>
+        {{ /if }}
     {{ /if }}
 </body>
 </html>

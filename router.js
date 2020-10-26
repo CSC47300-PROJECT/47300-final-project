@@ -14,6 +14,7 @@ const router = express.Router();
 
 // importing User Schema
 const User = require('./models/user')
+const user = require('./models/user')
 
 // cookie parser
 router.use(cookieParser('cats'))
@@ -97,7 +98,7 @@ router.get('/verify', (req, res) => {
           console.log('err', err);
         } else {
           req.session.flash = { type: 'success', text: 'Email verified successfully!' }
-          res.render('email-verification.html');
+          res.redirect('/email-verification');
         }
     });
 });   
@@ -208,6 +209,7 @@ router.post("/reset-password", function (req, res) {
       }
     );
 });
+
 
 // logout function
 router.get('/logout', (req, res) => {
