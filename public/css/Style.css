@@ -204,8 +204,23 @@ span{
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     text-align: center;
+    margin-bottom: 30px;
       
 }
+
+
+.products-box h1::after{
+    content:'';
+    background: -webkit-linear-gradient( #06c5ff,#10ffc3);
+    -webkit-text-fill-color: transparent;
+    width: 80px;
+    height: 5px;
+    border-radius: 5px;
+    position: absolute;
+    bottom: 100px;
+    left:50%;
+    transform: translateX(-50%);
+} 
 .products-box .col-4{
     /* flex-basis: 25%; */
     padding: 10px;

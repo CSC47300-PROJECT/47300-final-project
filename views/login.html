@@ -54,7 +54,7 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                       <ul class="navbar-nav mr-auto">
                         <li class="nav-item active">
-                          <a class="nav-link" href="/index">Home <span class="sr-only">(current)</span></a>
+                          <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item">
                           <a class="nav-link" href="#">Link</a>
@@ -90,14 +90,14 @@
         <input type="password" name="password">
         <button type="submit">submit</button>
     </form> -->
-    <!-- login box -->
+    <!--!!!!!!!!!!!!!!!!!!!!!!!!!!! login box !!!!!!!!!!!!!!!!!!!!!!!!!-->
     <div class = "container d-flex justify-content-center">
         <form  id = "login" class="input-group" action="/login", method="POST">
             <h1 >Login</h1>
-            <input type="text" class="input-field" placeholder = "User Id" required>
-            <input type="password" class="input-field" placeholder = "Password" required>
-            <input type="checkbox" class="check-box"><span>Remeber Password</span>
-            <a href="./reset-password">Reset Password </a>
+            <input type="text"  name="email" class="input-field" placeholder = "Email" required>
+            <input type="password" name="password" class="input-field" placeholder = "Password" required>
+            <!-- <input type="checkbox" class="check-box"><span>Remeber Password</span> -->
+           <!-- <a href="./reset-password">Reset Password </a> -->
             <a href="./forget-password">Forget Password </a>
             <button type= "submit" class = "submit-btn">Log in</button>
 
@@ -108,7 +108,7 @@
             </div> -->
         </form>
     </div>
-    <!-- login box end-->
+    <!--!!!!!!!!!!!!!!!!!!!!!!!!!!! login box end !!!!!!!!!!!!!!!!!!!!!!!!!-->
     
 </body>
 </html>

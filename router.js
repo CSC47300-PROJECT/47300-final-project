@@ -168,6 +168,7 @@ router.post('/forget-password-email', (req, res) => {
 });
 
 // reset password page
+
 router.get("/reset-password/verify", function (req, res) {
     User.findOne({ authToken: req.query.authToken }, (err, user) => {
         if (err) {
@@ -214,6 +215,12 @@ router.get('/logout', (req, res) => {
     req.logout();
     res.redirect('/');
 });
+
+
+router.get('/products', (req, res) => {
+  res.render('products.html');    
+});
+
 
 // export module
 module.exports = router
