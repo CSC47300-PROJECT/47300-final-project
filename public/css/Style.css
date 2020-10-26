@@ -208,8 +208,13 @@ transition: 0.5s ;
       
 }
 
+
+.products-box .row{
+    background-color: white;
+}
+
 /* The line in the product title bottom */
-.products-box h1::after{
+/* .productsTitle::after{
     content:'';
     background: -webkit-linear-gradient( #06c5ff,#10ffc3);
     -webkit-text-fill-color: transparent;
@@ -217,17 +222,17 @@ transition: 0.5s ;
     height: 5px;
     border-radius: 5px;
     position: absolute;
-    bottom: 100px;
+    bottom:0px;
     left:50%;
     transform: translateX(-50%);
-} 
+}  */
 
 
 .products-box .col-4{
     /* flex-basis: 25%; */
     padding: 10px;
     min-width: 200px;
-    background-color: white;
+    /* background-color: white; */
     /* margin-bottom: 50px; */
 }
 
