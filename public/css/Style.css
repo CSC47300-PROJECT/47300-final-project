@@ -238,3 +238,9 @@ transition: 0.5s ;
     margin-right: auto;
 }
 
+#EmailV{
+    text-align: center;
+    background: -webkit-linear-gradient( #06c5ff,#10ffc3);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}

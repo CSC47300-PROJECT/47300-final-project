@@ -17,12 +17,12 @@
 </head>
 <body>
     
-    {{if flash }}
+    <!-- {{if flash }}
     <div style="text-align: center" class="alert alert-{{ flash.type }} flash">
         <button type="button" class="close" data-dismiss="alert" onclick="$('.flash').hide();">&times;</button>
         {{ flash.text }}
     </div>
-    {{ /if }}
+    {{ /if }} -->
      <header>
        <!-- title -->
         <div class="container">
@@ -83,14 +83,16 @@
         </div>
       </header>
       <div class="container">
-          <h1>Email verification</h1>
+          <h1 id="EmailV" >Email verification</h1>
           {{if flash }}
           <div style="text-align: center" class="alert alert-{{ flash.type }} flash">
               <button type="button" class="close" data-dismiss="alert" onclick="$('.flash').hide();">&times;</button>
               {{ flash.text }}
           </div>
+          {{ if flash.text == 'Email verified successfully!'}}
+          <a href="/login"><button type= "submit" class = "submit-btn" style="width: 300px;">Login</button></a>
           {{ /if }}
-          <button type= "submit" class = "submit-btn">Login and go to homepage</button>
+         
         </div>
 </body>
 </html>

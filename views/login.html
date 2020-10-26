@@ -17,12 +17,12 @@
 </head>
 <body>
     <!-- <h1>login</h1> -->
-     {{ if flash }}
+     <!-- {{ if flash }}
     <div style="text-align: center" class="alert alert-{{ flash.type }} flash">
         {{ flash.text }}
         <button type="button" class="close" data-dismiss="alert" onclick="$('.flash').hide();">&times;</button>
     </div>
-    {{ /if }}
+    {{ /if }} -->
     
         <header>
           <!-- title -->
@@ -99,6 +99,8 @@
             <!-- <input type="checkbox" class="check-box"><span>Remeber Password</span> -->
            <!-- <a href="./reset-password">Reset Password </a> -->
             <a href="./forget-password">Forget Password </a>
+           
+            
             <button type= "submit" class = "submit-btn">Log in</button>
 
             <!-- <div class="social-icons">
@@ -107,6 +109,14 @@
                 <i class="fab fa-twitter"></i>
             </div> -->
         </form>
+        <span>
+          {{ if flash }}
+          <div style="text-align: center" class="alert alert-{{ flash.type }} flash">
+              {{ flash.text }}
+              <button type="button" class="close" data-dismiss="alert" onclick="$('.flash').hide();">&times;</button>
+          </div>
+          {{ /if }}
+         </span>
     </div>
     <!--!!!!!!!!!!!!!!!!!!!!!!!!!!! login box end !!!!!!!!!!!!!!!!!!!!!!!!!-->
     
