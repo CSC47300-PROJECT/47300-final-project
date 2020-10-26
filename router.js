@@ -98,7 +98,7 @@ router.get('/verify', (req, res) => {
           console.log('err', err);
         } else {
           req.session.flash = { type: 'success', text: 'Email verified successfully!' }
-          res.redirect('/email-verification');
+          res.render('email-verification.html');
         }
     });
 });   
