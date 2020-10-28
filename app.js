@@ -1,13 +1,12 @@
 const express = require('express')
 const bodyParser = require('body-parser')
-// const passport = require('passport')
-// const flash = require('express-flash')
-// const session = require('express-session')
-const multer = require('multer');
-const GridFsStorage = require("multer-gridfs-storage");
+const multer = require('multer')
+const GridFsStorage = require("multer-gridfs-storage")
+const Grid = require('gridfs-stream')
 const path = require('path')
+const methodOverride = require('method-override')
 const cors = require('cors')
-const crypto = require("crypto");
+const crypto = require("crypto")
 const favicon = require('serve-favicon')
 
 // create server
@@ -17,16 +16,18 @@ const app = express();
 const LocalStrategy = require('passport-local').Strategy;
 
 // require router.js
-const router = require('./router')
+const index = require('./api/routes/index')
+const product = require('./api/routes/product')
 
 // art-template engine
 app.engine('html', require('express-art-template'))
 
 // parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({ extended: true }))
 
-// parse application/json
+// Middleware parse application/json
 app.use(bodyParser.json())
+app.use(methodOverride('_method'))
 
 // static path
 app.use(express.static(__dirname + '/public'))
@@ -34,12 +35,9 @@ app.use('/node_modules/', express.static(__dirname + '/node_modules'))
 
 app.use(cors());
 
-// models - User
-// const User = require('./models/user')
-
-
 // calling router.js
-app.use(router)
+app.use(index)
+app.use(product)
 
 
 app.listen(5000, (req, res) => {

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+</head>
+<body>
+    <h1>Add products</h1>
+    {{ if currentUser  }}
+        <h6>Hello,{{ currentUser.username }}</h6>
+    {{else}}
+        <a href="./register">Register </a>
+        /
+        <a href="./login"> Login</a>
+        /
+    {{ /if }} 
+
+    <form action="/add-products" method="POST" enctype="multipart/form-data">
+        <label for="">Product Name</label>
+        <input type="text" name="productName">
+        <label for="">Product Species</label>
+        <select name="species" id="">
+            <option value="Fruit">Fruit</option>
+            <option value="Vegatable">Vegatable</option>
+            <option value="Seafood">Seafood</option>
+            <option value="Beverage">Beverage</option>
+        </select>
+        <label for="">Amount</label>
+        <input type="number">
+        <label for="">Price</label>
+        <input type="text">
+        <input type="text" name="Unit">
+        <select name="Qty" id="">
+            <option value="lb">lb</option>
+            <option value="each">each</option>
+            <option value="oz">oz</option>
+            <option value="ounce">ounce</option>
+            <option value="bunch">bunch</option>
+            <option value="count">count</option>
+        </select>
+        <label for="">Description</label>
+        <textarea name="description" id="" cols="30" rows="10"></textarea>
+        <input type="file" name="img">
+        <button type="submit">submit</button>
+    </form>
+</body>
+</html>

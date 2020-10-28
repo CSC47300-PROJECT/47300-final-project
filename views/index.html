@@ -17,6 +17,21 @@
     
 </head>
 <body>
+
+    {{ if flash }}
+    <div style="text-align: center" class="alert alert-{{ flash.type }} flash">
+        {{ flash.text }}
+        <button type="button" class="close" data-dismiss="alert" onclick="$('.flash').hide();">&times;</button>
+    </div>
+    {{ /if }}
+
+    {{ if currentUser && !currentUser.username }}
+    <form action="/set-username" method="POST">
+      <label for="">set username</label>
+        <input type="text" name="username">
+        <button type="submit">submit</button>
+    </form>
+    {{ else }}
     <header>
       <!-- title -->
         <div class="container">
@@ -30,7 +45,7 @@
                       <span id="userInfo">
                         {{ info }}
                         {{ if currentUser  }}
-                            <h6>Hello,{{ currentUser.email }}</h6>
+                            <h6>Hello,{{ currentUser.username }}</h6>
                         {{else}}
                         <a href="./register">Register </a>
                         /
@@ -163,5 +178,6 @@
       </div>    
     </footer>
     <!-- footer end-->
+    {{ /if }}
 </body>
 </html>

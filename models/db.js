@@ -5,7 +5,8 @@ const dotenv = require('dotenv')
 dotenv.config()
 const mongoURI = process.env.MONGO_DB_URI
 
-mongoose.connect(mongoURI, {useNewUrlParser: true, useUnifiedTopology: true}, function(err) {
+mongoose.connect(mongoURI, { useNewUrlParser: true, 
+    useUnifiedTopology: true, useCreateIndex: true }, function(err) {
     if (err) {
         console.log(err)
     } else {
