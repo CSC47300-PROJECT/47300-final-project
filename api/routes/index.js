@@ -47,7 +47,8 @@ router.use((req, res, next) => {
   next()
 });
 
-// home page
+// @route GET /
+// @desc Display home page
 router.get('/', (req, res) => {
     console.log('req.user', req.user)
     res.render('index.html', {
@@ -55,19 +56,22 @@ router.get('/', (req, res) => {
     })
 })
 
-// register page
+// @route GET /register
+// @desc Display register page
 router.get('/register', (req, res) => {
     res.render('register.html');    
 });
 
-// email verification page
+// @route GET /email-verification
+// @desc Display email verification page
 router.get('/email-verification', (req, res) => {
     res.render('email-verification.html', {
         title: 'Email verification sent!'
     });
 })
 
-// register function
+// @route POST /register
+// @desc user register
 router.post('/register', (req, res) => {
     User.register(new User ({
         email: req.body.email
@@ -90,7 +94,8 @@ router.post('/register', (req, res) => {
     });
 });
 
-// verify page
+// @route GET /verify
+// @desc Display verify information
 router.get('/verify', (req, res) => {
     User.verifyEmail(req.query.authToken, function (err, existingAuthToken) {
         if (err) {
@@ -102,19 +107,22 @@ router.get('/verify', (req, res) => {
     });
 });   
 
-// login page
+// @route GET /login
+// @desc Display login page
 router.get('/login', (req, res) => {
     res.render('login.html');
 });
 
-// unauthorized function
+// @route GET /unauthorized
+// @desc Display unauthorized 
 router.get('/unauthorized', (req, res) => {
     res.render('index.html', {
         info: "Unauthorized"
     });
 });
 
-// login function
+// @route POST /login
+// @desc user login 
 router.post("/login", function (req, res, next) {
     passport.authenticate("local", function (err, user) {
       if (err) {
@@ -135,7 +143,8 @@ router.post("/login", function (req, res, next) {
     })(req, res, next);
   });
 
-// set username 
+// @route POST /set-username
+// @desc set up username 
 router.post('/set-username', (req, res) => {
   User.findOne({ username: req.body.username }, (err, user) => {
     if (err) {
@@ -155,14 +164,15 @@ router.post('/set-username', (req, res) => {
   })
 });
    
-
-// forget password page
-router.get('/forget-password', (req, res) => {
-    res.render("forget-password.html");
+// @route GET /forgot-password
+// @desc Display forgot password page
+router.get('/forgot-password', (req, res) => {
+    res.render("forgot-password.html");
   });
 
-// send forget password email verification
-router.post('/forget-password-email', (req, res) => {
+// @route POST /forgot-password-mail 
+// @desc send forgot password email verification
+router.post('/forgot-password-email', (req, res) => {
     User.findOne({ email: req.body.email }, (err, user) => {
         if (err) {
           req.session.flash = { type: 'danger', text: err.message }
@@ -188,7 +198,8 @@ router.post('/forget-password-email', (req, res) => {
     })
 });
 
-// reset password page
+// @route GET /reset-password/verify
+// @desc Display reset password page
 router.get("/reset-password/verify", function (req, res) {
     User.findOne({ authToken: req.query.authToken }, (err, user) => {
         if (err) {
@@ -208,7 +219,8 @@ router.get("/reset-password/verify", function (req, res) {
     );
 });
 
-// reset password function
+// @route POST /rest-password
+// @desc reset password 
 router.post("/reset-password", function (req, res) {
     User.findOne({ _id: req.body.id }, (err, user) => {
         if (!user) {
@@ -230,7 +242,8 @@ router.post("/reset-password", function (req, res) {
     );
 });
 
-// logout function
+// @route logout
+// @desc user logout
 router.get('/logout', (req, res) => {
     req.logout();
     res.redirect('/');

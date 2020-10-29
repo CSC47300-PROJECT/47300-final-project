@@ -71,7 +71,7 @@ router.get('/add-products', (req, res) => {
 
 // @route POST /upload
 // @desc Uploads file to DB
-router.post('/upload', upload.single('file'), (req, res) => {
+router.post('/upload-product', upload.single('file'), (req, res) => {
     res.json({ file: req.file })
 })
 
