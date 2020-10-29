@@ -11,11 +11,8 @@ const ProductSchema = mongoose.Schema({
     Qty: Number,
     unit: String,
     description: String,
-    img: {
-        data: Buffer,
-        contentType: String
-    }
-
+    img_id : String,
+    img_name: String
 });
 
 module.exports = mongoose.model('Product', ProductSchema);

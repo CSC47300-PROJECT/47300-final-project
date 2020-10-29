@@ -18,7 +18,7 @@
         /
     {{ /if }} 
 
-    <form action="/add-products" method="POST" enctype="multipart/form-data">
+    <form action="/upload" method="POST" enctype="multipart/form-data">
         <label for="">Product Name</label>
         <input type="text" name="productName">
         <label for="">Product Species</label>
@@ -43,7 +43,7 @@
         </select>
         <label for="">Description</label>
         <textarea name="description" id="" cols="30" rows="10"></textarea>
-        <input type="file" name="img">
+        <input type="file" name="file">
         <button type="submit">submit</button>
     </form>
 </body>
