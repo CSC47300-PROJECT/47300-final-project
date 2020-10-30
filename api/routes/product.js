@@ -72,11 +72,14 @@ router.get('/add-products', (req, res) => {
 // @route POST /upload
 // @desc Uploads file to DB
 router.post('/upload-product', upload.single('file'), (req, res) => {
+    console.log(req.file.id)
+    console.log(req.file.filename)
+    console.log(req.file.uploadDate)
     res.json({ file: req.file })
 })
 
 // @route GET /files
-// desc Display all files in JSON
+// @desc Display all files in JSON
 router.get('/files', (req, res) => {
     gfs.find().toArray((err, files) => {
         if (!files || files.length === 0) {
@@ -90,7 +93,7 @@ router.get('/files', (req, res) => {
 });
 
 // @route GET /files/:filename
-// desc Display single files in JSON
+// @desc Display single files in JSON
 router.get('/files/:fileid', (req, res) => {
     let _id = mongoose.Types.ObjectId(req.params.fileid);
     gfs.find({ _id: _id }).toArray((err, file) => {
@@ -105,7 +108,7 @@ router.get('/files/:fileid', (req, res) => {
 });
 
 // @route GET /image/:filename
-// desc Display image
+// @desc Display image
 router.get('/image/:fileid', (req, res) => {
     let _id = mongoose.Types.ObjectId(req.params.fileid);
     gfs.find({ _id: _id }).toArray((err, file) => {
