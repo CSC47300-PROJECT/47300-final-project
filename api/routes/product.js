@@ -14,6 +14,7 @@ const router = express.Router();
 // importing User Schema
 const Product = require('../../models/product')
 const mongoose = require('../../models/db')
+const product = require('../../models/product')
 
 // mongoose connection
 const conn = mongoose.createConnection(mongoURI, {
@@ -57,9 +58,33 @@ const storage = new GridFsStorage({
 
 const upload = multer({ storage });
 
-// product page
+
+// @route GET /
+// @desc Display home page
+router.get('/', (req, res) => {
+    Product.find((err, products) => {
+        if (err) {
+            req.session.flash = { type: 'danger', text: err.message }
+            res.redirect('/')
+        }
+        res.render('index.html', {
+            products: products
+        })
+    })
+});
+
+// @route GET /products
+// @desc Display product page
 router.get('/products', (req, res) => {
-    res.render('products.html');    
+    Product.find((err, products) => {
+        if (err) {
+            req.session.flash = { type: 'danger', text: err.message }
+            res.redirect('/products')
+        }
+        res.render('product.html', {
+            products: products
+        })
+    })    
 });
 
 
@@ -105,6 +130,46 @@ router.post('/upload-product', upload.single('file'), (req, res) => {
     });   
 });
     
+// @route GET /show-products
+// @desc Display modify products
+router.get('/modify-products', (req, res) => {
+    Product.find((err, products) => {
+        if (err) {
+            req.session.flash = { type: 'danger', text: err.message }
+            res.redirect('/modify-products')
+        }
+        console.log(products)
+        res.render('modify-products.html', {
+            products: products
+        })
+    })
+})
+
+// @route GET /modify-products/:id
+// @desc Display modify product page
+router.get('/modify-products/:id', (req, res) => {
+    Product.findById(req.params.id, (err, products) => {
+        if (err) {
+            req.session.flash = { type: 'danger', text: err.message }
+            res.redirect('back')
+        }
+        res.render('modify.html', {
+            products: products
+        })
+        
+    })
+})
+
+// @route POST /modify-produts/:id
+// @desc Modify product by product id
+router.post('/modify-product/:id', upload.single('file'), (req, res) => {
+    // TODO
+})
+
+// TODO
+// @route POST /delete-products/:id
+// @desc Delete product
+
 
 // @route GET /files
 // @desc Display all files in JSON

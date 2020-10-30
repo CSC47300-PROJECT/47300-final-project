@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <script src="node_modules/jquery/dist/jquery.min.js"></script>
+  <style>
+    img {
+      width: 150px;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Modify</h1>
+  <div class="show">
+    {{ if products }}
+      <div class='row'>
+        <div class="card card-body mb-3">
+          <img src="/image/{{ products.img_id }}" alt="">
+          <form action="/modify-products/{{products.id}}" method="POST" enctype="multipart/form-data">
+            <div>
+              <label for="">upload new image</label>
+              <input type="file" name="file">
+            </div>
+            <div>
+              <label for="">Product Name</label>
+              <input type="text" name="productName" value="{{ products.productName }}">
+            </div>
+            <div>
+              <label for="">Product Species</label>
+              <select name="species" id="">
+                  <option value="{{products.species}}">{{products.species}}</option>
+                  <option value="Fruit">Fruit</option>
+                  <option value="Vegatable">Vegatable</option>
+                  <option value="Seafood">Seafood</option>
+                  <option value="Beverage">Beverage</option>
+              </select>
+            </div>
+            <div>
+              <label for="">Price</label>
+              <input type="text" name="price" value="{{ products.price}}">
+            </div>
+            <div>
+              <label for="">Net Weight</label>
+              <input type="text" name="netweight" value="{{ products.netweight }}">
+            </div>
+            <div>
+              <label for="">Amount</label>
+              <input type="number" name="amount" value="{{ products.amount }}">
+            </div>
+            <div>
+              <label for="">Sold</label>
+              <input type="number" name="sold" value="{{ products.sold }}">
+            </div>
+            <div>
+              <label for="">Description</label>
+              <textarea name="desc" id="" cols="30" rows="10">{{ products.desc}}</textarea>
+            </div>
+            <div>
+              <button type="submit" class="btn btn-primary">Modify this product</button>
+            </div>
+          </form>
+        </div> 
+      </div>   
+      <form action="delete-prodect/:id" method="POST">
+        <button type="submit" class="btn btn-danger">Delete this product</button>
+      </form>
+      {{ else }}
+       <h3>No product</h3>
+      {{ /if }}
+  </div>
+</body>
+</html>

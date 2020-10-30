@@ -47,15 +47,6 @@ router.use((req, res, next) => {
   next()
 });
 
-// @route GET /
-// @desc Display home page
-router.get('/', (req, res) => {
-    console.log('req.user', req.user)
-    res.render('index.html', {
-        title: 'Hello World'
-    })
-})
-
 // @route GET /register
 // @desc Display register page
 router.get('/register', (req, res) => {
