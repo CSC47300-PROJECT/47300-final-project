@@ -72,11 +72,39 @@ router.get('/add-products', (req, res) => {
 // @route POST /upload
 // @desc Uploads file to DB
 router.post('/upload-product', upload.single('file'), (req, res) => {
-    console.log(req.file.id)
-    console.log(req.file.filename)
-    console.log(req.file.uploadDate)
-    res.json({ file: req.file })
-})
+    Product.findOne({
+        productName: req.body.productName,
+        netweight: req.body.netweight
+    }, (err, product) => {
+        if (err) {
+            req.session.flash = { type: 'danger', text: err.message }
+            res.redirect('back')
+        } else if (product) {
+            gfs.delete(req.file.id, (err) => {
+                if (err) {
+                    req.session.flash = { type: 'danger', text: err.message }
+                    res.redirect('back')
+                }
+                req.session.flash = { type: 'danger', text: 'Product already exist'}
+                res.redirect('back')
+            })
+        } else {
+            let productInfo = {
+                ...req.body,
+                img_id: req.file.id
+            }
+            Product.create(productInfo, (err) => {
+                if (err) {
+                    req.session.flash = { tpye: 'danger', text: err.message }
+                    res.redirect('back')
+                }
+                req.session.flash = { type: 'success', text: 'Add product successfully!'}
+                res.redirect('back')
+            });
+        };
+    });   
+});
+    
 
 // @route GET /files
 // @desc Display all files in JSON
