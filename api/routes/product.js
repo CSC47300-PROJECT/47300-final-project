@@ -14,7 +14,6 @@ const router = express.Router();
 // importing User Schema
 const Product = require('../../models/product')
 const mongoose = require('../../models/db')
-const product = require('../../models/product')
 
 // mongoose connection
 const conn = mongoose.createConnection(mongoURI, {
@@ -81,7 +80,7 @@ router.get('/products', (req, res) => {
             req.session.flash = { type: 'danger', text: err.message }
             res.redirect('/products')
         }
-        res.render('product.html', {
+        res.render('products.html', {
             products: products
         })
     })    
@@ -153,22 +152,64 @@ router.get('/modify-products/:id', (req, res) => {
             req.session.flash = { type: 'danger', text: err.message }
             res.redirect('back')
         }
-        res.render('modify.html', {
+        res.render('update-product.html', {
             products: products
         })
         
     })
-})
+});
 
 // @route POST /modify-produts/:id
 // @desc Modify product by product id
 router.post('/modify-product/:id', upload.single('file'), (req, res) => {
-    // TODO
-})
+   let updatedProduct;
+   if (req.file) {
+    let oldImage_id = mongoose.Types.ObjectId(req.body.img_id);
+    gfs.delete(oldImage_id, (err) => {
+        if (err) {
+            console.log(err.message)
+        }
+    });
+    updatedProduct = {
+        ...req.body,
+        img_id: req.file.id
+    };
+   } else {
+       updatedProduct = {
+           ...req.body
+       }
+   }
+   Product.findByIdAndUpdate(req.params.id, updatedProduct, (err) => {
+    if (err) {
+        req.session.flash = { type: 'danger', text: 'update product failed' }
+        res.redirect('back')
+    } else {
+        req.session.flash = { type: 'success', text: 'update product successfully!'}
+        res.redirect('back')
+    }
+    });
+});
 
-// TODO
 // @route POST /delete-products/:id
 // @desc Delete product
+router.delete('/delete-product/:id', (req, res) => {
+    let oldImage_id = mongoose.Types.ObjectId(req.body.img_id);
+    gfs.delete(oldImage_id, (err) => {
+        if (err) {
+            console.log(err.message)
+        }
+    });
+    Product.remove({
+        _id: req.params.id
+    }, (err) => {
+        if (err) {
+            req.session.flash = { type: 'danger', text: err.message }
+            res.redirect('back')
+        }
+        req.session.flash = { type: 'success', text: 'Delete product successfully!' }
+        res.redirect('/modify-products')
+    });
+});
 
 
 // @route GET /files
@@ -205,15 +246,16 @@ router.get('/files/:fileid', (req, res) => {
 router.get('/image/:fileid', (req, res) => {
     let _id = mongoose.Types.ObjectId(req.params.fileid);
     gfs.find({ _id: _id }).toArray((err, file) => {
-        if (!file || file[0].length === 0) {
+        // console.log(file)
+        if (!file || file.length === 0) {
             return res.status(404).json({
                 err: 'No file exist'
             });
         }
         // image only
-        if(file[0].contentType === 'image/jpeg' || file[0].contentType === 'image/png') {
+        if (file[0].contentType === 'image/jpeg' || file[0].contentType === 'image/png') {
             // files exist
-            console.log('file', file)
+            // console.log('file', file)
             // Read output to brower
             gfs.openDownloadStream(_id).pipe(res);
         } else {
