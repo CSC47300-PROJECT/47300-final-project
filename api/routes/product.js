@@ -266,6 +266,33 @@ router.get('/image/:fileid', (req, res) => {
     });
 });
 
-  
+// @route GET /search-result
+// @desc Display search-result
+router.get('/search-result', (req, res) => {
+    res.render('search-result.html')
+})
+
+// @route POST /search-result
+// @desc search product
+router.post('/search-product', (req, res) => {
+    let product = req.body.searchValue
+    console.log('result', product)
+    Product.find({ productName:{$regex:product, $options:"$i"} }, (err, products) => {
+        if (err) {
+            req.session.flash = { type: 'danger', text: err.message }
+            res.redirect('back')
+        }
+        else if (products.length == 0) {
+            req.session.flash = { type: 'danger', text: 'No search results' }
+            res.redirect('/products')
+        } else {
+            console.log(products)
+            res.render('search-result.html', {
+                products: products
+        });
+        }
+    });
+});
+
 // export module
 module.exports = router
