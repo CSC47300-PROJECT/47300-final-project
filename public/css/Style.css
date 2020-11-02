@@ -1,5 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Gugi&display=swap');
 
+:root {
+  --primaryColor: #45ccb8;
+  --mainWhite: #fff;
+  --mainBlack: #222;
+  --mainGrey: #ececec;
+  --mainSpacing: 0.1rem;
+  --mainTransition: all 0.3s linear;
+}
+
 /* For title */
 .container h2{
     font-family: 'Gugi', cursive;
@@ -248,4 +257,64 @@ transition: 0.5s ;
     background: -webkit-linear-gradient( #06c5ff,#10ffc3);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+}
+
+/* for product */
+.products {
+  padding: 4rem 0;
+}
+
+
+.img-container {
+  position: relative;
+  overflow: hidden;
+}
+.bag-btn {
+  position: absolute;
+  top: 70%;
+  right: 0;
+  background: var(--primaryColor);
+  border: none;
+  text-transform: uppercase;
+  padding: 0.5rem 0.75rem;
+  letter-spacing: var(--mainSpacing);
+  font-weight: bold;
+  transition: var(--mainTransition);
+  transform: translateX(100%);
+  cursor: pointer;
+}
+.bag-btn:hover {
+  color: var(--mainWhite);
+}
+
+.img-container:hover .bag-btn {
+  transform: translateX(0);
+}
+.product-img {
+  display: block;
+  width: 100%;
+  min-height: 12rem;
+  transition: var(--mainTransition);
+}
+.img-container:hover .product-img {
+  opacity: 0.5;
+}
+
+.product h3 {
+  text-transform: capitalize;
+  font-size: 1.1rem;
+  margin-top: 1rem;
+  letter-spacing: var(--mainSpacing);
+  text-align: center;
+}
+
+.product h4 {
+  margin-top: 0.7rem;
+  letter-spacing: var(--mainSpacing);
+  text-align: center;
+}
+
+.product-section .row{
+    margin-top: 30px;
+    background-color: white;
 }

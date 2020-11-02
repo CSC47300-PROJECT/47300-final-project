@@ -13,6 +13,7 @@
     <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     <!-- <link rel="stylesheet" type="text/css" href="css/style.css" /> -->
     <link rel="stylesheet" type="text/css" href="/public/css/Style.css" />
+    <script scr="/public/js/product.js"></script>
     <title>products</title>
 </head>
 
@@ -32,6 +33,8 @@
                           <a href="./login"> Login</a>
                           /
                           <a href="./logout"> Logout</a>
+                          /
+                          <span><i class="fas fa-shopping-cart"></i></span>
                       </div>
                   </div>
               </div>
@@ -79,8 +82,52 @@
       </header>
       <!-- Featured Products -->
       <main>
-        <div class = "container d-flex justify-content-center">
-            <div class="products-box">
+        <div class = "container product-section">
+          <div class="products-box">
+            <h1 class="productsTitle">
+              Products
+            </h1>
+          </div>  
+          
+          <div class="row">
+            <article class="product col-4">
+              <div class="img-container">
+                <img src="/public/img/ASampleProduct.png" alt="Product" class="product-img">
+                <button class="bag-btn" data-id="1">
+                  <i class="fas fa-shopping-cart"></i>
+                  add to cart
+                </button>
+              </div>
+              <h3>A product</h3>
+              <h4>$16.00</h4>
+            </article>
+
+            <article class="product col-4">
+              <div class="img-container">
+                <img src="/public/img/ASampleProduct.png" alt="Product" class="product-img">
+                <button class="bag-btn" data-id="1">
+                  <i class="fas fa-shopping-cart"></i>
+                  add to cart
+                </button>
+              </div>
+              <h3>A product</h3>
+              <h4>$16.00</h4>
+            </article>
+
+            <article class="product col-4">
+              <div class="img-container">
+                <img src="/public/img/ASampleProduct.png" alt="Product" class="product-img">
+                <button class="bag-btn" data-id="1">
+                  <i class="fas fa-shopping-cart"></i>
+                  add to cart
+                </button>
+              </div>
+              <h3>A product</h3>
+              <h4>$16.00</h4>
+            </article>
+          </div>
+
+            <!-- <div class="products-box">
                 <h1 >
                      Products
                 </h1>
@@ -135,7 +182,7 @@
                           <p>$60.00</p>
                   </div>
               </div>
-            </div>
+            </div> -->
             
         </div>
       </main>
