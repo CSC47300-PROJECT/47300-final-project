@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <script src="/node_modules/jquery/dist/jquery.min.js"></script>
+  <style>
+    img {
+      width: 150px;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Modify products</h1>
+
+  {{ if flash }}
+  <div style="text-align: center" class="alert alert-{{ flash.type }} flash">
+      {{ flash.text }}
+      <button type="button" class="close" data-dismiss="alert" onclick="$('.flash').hide();">&times;</button>
+  </div>
+  {{ /if }}
+
+ 
+  <div class="show">
+    {{ each products }}
+      {{ if $value.species == 'Fruit'}}
+      <div class='row'>
+        <div class="card card-body mb-3">
+          <a href="/modify-products/{{@ $value._id}}">
+          <img src="image/{{$value.img_id}}" alt="">
+          <div>{{ $value.productName }}</div> 
+          <div>${{ $value.price}}</div>  
+          <div> {{ $value.netweight}} </div> 
+          <div>Sold: {{ $value.sold }}</div>  
+          </a>
+        </div> 
+      </div>   
+      
+      {{ /if }}
+    {{ /each }}
+  </div>
+
+    <div class="show">
+      {{ each products }}
+        {{ if $value.species == 'Seafood'}}
+        <div class='row'>
+          <div class="card card-body mb-3">
+            <a href="/modify-products/{{@ $value._id}}">
+            <img src="image/{{$value.img_id}}" alt="">
+            <div>{{ $value.productName }}</div> 
+            <div>${{ $value.price}}</div>  
+            <div> {{ $value.netweight}} </div> 
+            <div>Sold: {{ $value.sold }}</div>  
+           </a> 
+          </div> 
+        </div>   
+        {{ /if }}
+      {{ /each }}
+    </div>
+</body>
+</html>
