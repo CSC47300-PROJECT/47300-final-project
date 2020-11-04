@@ -21,7 +21,7 @@
     <script src="https://kit.fontawesome.com/1d299bbc93.js" crossorigin="anonymous"></script>
     <script src="node_modules/jquery/dist/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="css/style.css" />
-    <!-- <link rel="stylesheet" type="text/css" href="/public/css/Style.css" /> -->
+    <link rel="stylesheet" type="text/css" href="/public/css/Style.css" />
 </head>
 <body>
 <header>
@@ -155,52 +155,6 @@
         
     </div>
 </main>
-
-    
-
-    <title>Document</title>
-    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
-    <script src="/node_modules/jquery/dist/jquery.min.js"></script>
-</head>
-<body>
-    <h1>Add products</h1>
-    {{ if currentUser  }}
-        <h6>Hello,{{ currentUser.username }}</h6>
-    {{else}}
-        <a href="./register">Register </a>
-        /
-        <a href="./login"> Login</a>
-        /
-    {{ /if }} 
-
-    {{if flash }}
-        <div style="text-align: center" class="alert alert-{{ flash.type }} flash">
-            <button type="button" class="close" data-dismiss="alert" onclick="$('.flash').hide();">&times;</button>
-            {{ flash.text }}
-        </div>
-    {{ /if }}
-
-    <form action="/upload-product" method="POST" enctype="multipart/form-data">
-        <label for="">Product Name</label>
-        <input type="text" name="productName">
-        <label for="">Product Species</label>
-        <select name="species" id="">
-            <option value="Fruit">Fruit</option>
-            <option value="Vegatable">Vegatable</option>
-            <option value="Seafood">Seafood</option>
-            <option value="Beverage">Beverage</option>
-        </select>
-        <label for="">Amount</label>
-        <input type="number" name="amount">
-        <label for="">Price</label>
-        <input type="text" name="price">
-        <label for="">Net Weight</label>
-        <input type="text" name="netweight">
-        <label for="">Description</label>
-        <textarea name="desc" id="" cols="30" rows="10"></textarea>
-        <input type="file" name="file">
-        <button type="submit">submit</button>
-    </form>
 
 </body>
 </html>
