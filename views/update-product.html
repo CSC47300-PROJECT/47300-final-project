@@ -18,8 +18,8 @@
   <script src="https://kit.fontawesome.com/1d299bbc93.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
   <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-  <!-- <link rel="stylesheet" type="text/css" href="css/style.css" /> -->
-  <link rel="stylesheet" type="text/css" href="/public/css/Style.css" />
+  <link rel="stylesheet" type="text/css" href="css/style.css" />
+  <!-- <link rel="stylesheet" type="text/css" href="/public/css/Style.css" /> -->
 
   <title>Document</title>
   <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
@@ -121,28 +121,33 @@
     
       <div class='row upload-product'>
       <div class="container d-flex justify-content-center">
-        <div class="card card-body mb-3">
-          <!-- <div class="show"> -->
-                  <div class="card card-body mb-3">
+       
+
+
+                  <div class="card-body mb-3">
                     <h3>Update Product</h3>
-                    
+
                     {{ if products }}
-                    <img src="/image/{{ products.img_id }}" alt="">
+                    <img class="product-img" src="/image/{{ products.img_id }}" alt="">
+                    <div class="input-upload">
+                    
+                    
+                    
                     <form action="/modify-product/{{products.id}}" method="POST" enctype="multipart/form-data">
                       <div>
-                        <label for="">upload new image: </label>
+                        <label for="" style="padding-right: 5px;">upload new image: </label>
                         <input type="file" name="file">
                       </div>
                       <div>
-                        <label for="">Product Name: </label>
+                        <label for="" style="padding-right: 32px;">Product Name: </label>
                         <input type="text" name="productName" value="{{ products.productName }}">
                       </div>
                       <div>
-                        <label for="">Image Id: </label>
+                        <label for=""style="padding-right: 62px;">Image Id: </label>
                         <input type="text" name="img_id" value="{{ products.img_id }}" style="display: none;">
                       </div>
                       <div>
-                        <label for="">Product Species: </label>
+                        <label for="" style="padding-right: 20px;">Product Species: </label>
                         <select name="species" id="">
                           <option value="{{products.species}}">{{products.species}}</option>
                           <option value="Fruit">Fruit</option>
@@ -152,26 +157,31 @@
                         </select>
                       </div>
                       <div>
-                        <label for="">Price: </label>
+                        <label for="" style="padding-right: 98px;">Price: </label>
                         <input type="text" name="price" value="{{ products.price}}">
                       </div>
                       <div>
-                        <label for="">Net Weight: </label>
+                        <label for="" style="padding-right: 51px;">Net Weight: </label>
                         <input type="text" name="netweight" value="{{ products.netweight }}">
                       </div>
                       <div>
-                        <label for="">Amount: </label>
+                        <label for="" style="padding-right: 73px;">Amount: </label>
                         <input type="number" name="amount" value="{{ products.amount }}">
                       </div>
                       <div>
-                        <label for="">Sold: </label>
+                        <label for="" style="padding-right: 99px;">Sold: </label>
                         <input type="number" name="sold" value="{{ products.sold }}">
                       </div>
-                      <div>
-                        <label for="">Description: </label>
+                      <div style="padding-right: 50px; margin-bottom: -27px;"> 
+                        <label for="" >Description: </label>
+                        <!-- <textarea name="desc" id="" cols="30" rows="10">{{ products.desc}}</textarea> -->
+                      </div>
+                      <div style="margin-left: 135px;">
                         <textarea name="desc" id="" cols="30" rows="10">{{ products.desc}}</textarea>
                       </div>
+                      </div>
                       <div>
+
                         <button type="submit" id="UpdateBtn" class="btn btn-primary">Update product</button>
                       </div>
                     </form>
@@ -186,7 +196,7 @@
                 </div>
                
           </div>
-        </div>
+       
       </div>
       </div>
         

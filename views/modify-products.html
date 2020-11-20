@@ -31,14 +31,14 @@
 </head>
 
 <body>
-  <h1>Modify products</h1>
+  <!-- <h1>Modify products</h1>
 
   {{ if flash }}
   <div style="text-align: center" class="alert alert-{{ flash.type }} flash">
       {{ flash.text }}
       <button type="button" class="close" data-dismiss="alert" onclick="$('.flash').hide();">&times;</button>
   </div>
-  {{ /if }}
+  {{ /if }} -->
 
   <header>
     <!-- title -->
@@ -113,6 +113,19 @@
     </div>
     <!-- navbar end-->
   </header>
+
+  <div class="modify-title">
+<h1>Modify products</h1>
+
+{{ if flash }}
+<div style="text-align: center" class="alert alert-{{ flash.type }} flash">
+  {{ flash.text }}
+  <button type="button" class="close" data-dismiss="alert" onclick="$('.flash').hide();">&times;</button>
+</div>
+{{ /if }}
+
+  </div>
+  
 
   <div class="container d-flex justify-content-center">
 

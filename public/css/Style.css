@@ -418,10 +418,24 @@ transition: 0.5s ;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     margin-bottom: 30px;
+    text-align: center;
+    
 }
 
-.upload-product{
-  text-align: center;
+.product-img{
+  height: 300px;
+  width: 300px;
+  margin-bottom: -300px;
+  padding-left: 200px;
+  text-align: left;
+}
+
+.input-upload{
+  padding-left: 50%;
+  
+}
+.input-upload label{
+  margin-top: 5px;;
 }
 
 .upload-product label{
@@ -459,12 +473,44 @@ color:gray;
     margin: 30px 0px;
 }
 /* --------------add-product--------------- */
-.add-product-box{
+.add-product-box h1{
   text-align: center;
+  background: -webkit-linear-gradient( #06c5ff,#10ffc3);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin: 30px 0px;
+
 }
 .add-product-box h3{
   background: -webkit-linear-gradient( #06c5ff,#10ffc3);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     margin: 30px 0px;
+}
+/*-----------------modify-products-------------*/
+.modify-title{
+text-align: center;
+}
+.modify-title h1{
+  background: -webkit-linear-gradient( #06c5ff,#10ffc3);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 30px;
+}
+
+.add-product-box label{
+  margin-top: 5px;
+  color:gray;
+}
+
+.modify-title .submit-btn{
+    width:20%;
+    padding:10px 30px;
+    cursor:pointer;
+    display:block;
+    margin:20px 30px;
+    background: linear-gradient(to right,  #10ffc3, #06c5ff);
+    border:0;
+    outline:0;
+    border-radius: 30px;
 }
