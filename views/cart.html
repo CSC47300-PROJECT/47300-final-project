@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Buy cool new product</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?version=3.52.1&features=fetch"></script>
+    <!-- JS.stripe  -->
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+  </head>
+  <body>
+    {{ if currentUser  }}
+    <h6>Hello,{{ currentUser.username }}</h6>
+    {{else}}
+    <a href="./register">Register </a>
+    /
+    <a href="./login"> Login</a>
+    /
+    {{ /if }} 
+    <!-- stripe public key -->
+    <section>
+     
+      <div class="product">
+        <img
+          src="https://i.imgur.com/EHyR2nP.png"
+          alt="The cover of Stubborn Attachments"
+        />
+        <div class="description">
+          <h3>Stubborn Attachments</h3>
+          <h5>$33.00</h5>
+        </div>
+      </div>
+      <button id="checkout-button">Checkout</button>
+      {{orderId}}
+    </section>
+  </body>
+  <script type="text/javascript">
+  // product data 
+    const data = [
+      {
+        productName: 'Apple',
+        img_id: '5f9cec3f3666763ec0b209b7',
+        unit_amount: 3000,  //price $30;  needs x 100
+        quantity: 2
+      },
+      {
+        productName: 'Banana',
+        img_id: '5f9e50c8eb315849fc89be93',
+        unit_amount: 1000,
+        quantity: 3
+      },
+    ];
+    // Create an instance of the Stripe object with your publishable API key
+    var checkoutButton = document.getElementById("checkout-button");
+    checkoutButton.addEventListener("click", function (e) {
+      e.preventDefault();
+      fetch("/cart", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        redirect:"follow",
+        body: JSON.stringify(data)
+      })
+      .then(function (response) {
+          console.log(response);
+          console.log(response.url)
+          location.href= response.url;
+        })
+        .then(data => console.log(JSON.stringify(data)))
+        .catch(function (error) {
+          console.error("Error:", error);
+        });
+       
+
+    });
+  </script>
+</html>
