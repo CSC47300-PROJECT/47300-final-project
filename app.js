@@ -1,14 +1,6 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 
-// const multer = require('multer')
-// const GridFsStorage = require("multer-gridfs-storage")
-// const Grid = require('gridfs-stream')
-// const path = require('path')
-const methodOverride = require('method-override')
-const cors = require('cors')
-// const crypto = require("crypto")
-
 const methodOverride = require('method-override')
 const cors = require('cors')
 
