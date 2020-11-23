@@ -41,19 +41,40 @@ router.post('/cart', (req, res) => {
 
 
 router.get("/checkout/:id", (req, res) => {
-  res.render('checkout.html', {
-    publicKey: stripePublicKey
+  let orderId = req.params.id
+  Order.findOne({_id:orderId}, (err, orderList) => {
+    if (err) {
+      console.log(err)
+    } 
+    if (orderList) {
+      var products = orderList.product
+      var str = JSON.stringify(products)
+      products = JSON.parse(str)
+      res.render('checkout.html', {
+        products: products,
+        publicKey: stripePublicKey,
+        orderId: orderId
+      });
+    } else {
+      res.redirect('back');
+    } 
   })
 })
 
 router.post('/create-session', async (req, res) => {
+  let orderId = req.body[2]
+  console.log('orderId!!!:' ,orderId)
   let userinfo = req.body[1]
   let product = req.body[0]
-  // console.log(product[0].price_data.product_data.name)
-  // console.log(product[0].quantity)
-  var products = [];
+  var products = []
+  console.log('images: :', product[0].price_data.product_data.images)
   for (let i = 0; i < product.length; i++) {
-    products.push({productName : product[i].price_data.product_data.name, quantity : product[i].quantity }); 
+    products.push({
+      productName : product[i].price_data.product_data.name,
+      unit_amount: product[i].price_data.unit_amount,
+      img_id: product[i].price_data.product_data.images[0],
+      quantity : product[i].quantity
+    }); 
   }
   let username = userinfo[0].firstName + " " + userinfo[0].lastName
   let shippingAddress = userinfo[0].shippingAddress
@@ -76,7 +97,7 @@ router.post('/create-session', async (req, res) => {
     }  
   }
   console.log('orderList', orderList)
-  Order.create(orderList, (err, order) => {
+  Order.findByIdAndUpdate(orderId, orderList, (err) => {
     if (err) {
       console.log(err)
     } 
@@ -100,8 +121,8 @@ router.post('/create-session', async (req, res) => {
     //   },
   
     mode: 'payment',
-    success_url: `http://127.0.0.1:5000/order/success/${req.params.id}`,
-    cancel_url: `http://127.0.0.1:5000/order/cancel/${req.params.id}`,
+    success_url: `http://127.0.0.1:5000/order/success/${orderId}`,
+    cancel_url: `http://127.0.0.1:5000/order/cancel/${orderId}`,
   });
 
   res.json({ id: session.id });
@@ -110,8 +131,23 @@ router.post('/create-session', async (req, res) => {
 
 
 router.get("/order/success/:id", async (req, res) => {
-  console.log(req.params.id)
-  res.render('success.html')
+  console.log('success/orderId:', req.params.id)
+  Order.findById(req.params.id, (err, orderList) => {
+    if (err) {
+      console.log(err)
+    }
+    if (orderList) {
+      var products = orderList.product
+      var products = orderList.product
+      var str = JSON.stringify(products)
+      products = JSON.parse(str)
+      res.render('success.html', {
+        products: products
+      } )
+    } else {
+      res.render('success.html')
+    }
+  })
 })
 
 router.get("/order/cancel/:id", (req, res) => {

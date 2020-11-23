@@ -11,7 +11,8 @@ const OrderSchema = mongoose.Schema({
     product: [{
       quantity: Number,
       productName: String,
-      img_id : String, 
+      unit_amount: Number,
+      img_id : String,
     }]
 });
 

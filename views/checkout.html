@@ -5,7 +5,7 @@
     <script src="https://polyfill.io/v3/polyfill.min.js?version=3.52.1&features=fetch"></script>
     <!-- JS.stripe  -->
     <script src="https://js.stripe.com/v3/"></script>
-    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="/node_modules/jquery/dist/jquery.min.js"></script>
   </head>
   <body>
     {{ if currentUser  }}
@@ -19,6 +19,7 @@
     <!-- stripe public key -->
     <script>
        var stripePublicKey = '{{ publicKey }}' 
+       var orderId = '{{ orderId }}'
     </script>
     <section>
       <div class="userInfo">
@@ -55,7 +56,14 @@
           <h3>Stubborn Attachments</h3>
           <h5>$33.00</h5>
         </div>
-      </div>
+      </div> 
+      {{ each products }}
+      {{ $value.productName}}
+      {{ $value.img_id }}
+      {{ $value.unit_amount }}
+      {{ $value.quantity }}
+      {{/each}}
+      
       <button id="checkout-button">Checkout</button>
     </section>
   </body>
@@ -79,7 +87,7 @@
             currency:'usd',
             product_data: {
               name:'Banana',
-              images: ['https://i.imgur.com/EHyR2nP.png'],
+              images: ['https://i.imgur.com/EHyR2n9.png'],
             },
             unit_amount: 1000,
           },
@@ -97,7 +105,7 @@
         headers: {
           "Content-Type": "application/json"
         },
-        body: JSON.stringify([data, userInfo])
+        body: JSON.stringify([data, userInfo, orderId])
       })
         .then(function (response) {
           return response.json();
