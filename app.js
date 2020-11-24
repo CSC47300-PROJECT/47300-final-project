@@ -1,9 +1,7 @@
 const express = require('express')
 const bodyParser = require('body-parser')
-
 const methodOverride = require('method-override')
 const cors = require('cors')
-
 const favicon = require('serve-favicon')
 
 // create server
@@ -15,6 +13,7 @@ const LocalStrategy = require('passport-local').Strategy;
 // require router.js
 const index = require('./api/routes/index')
 const product = require('./api/routes/product')
+const order = require('./api/routes/order')
 
 // art-template engine
 app.engine('html', require('express-art-template'))
@@ -35,6 +34,7 @@ app.use(cors());
 // calling router.js
 app.use(index)
 app.use(product)
+app.use(order)
 
 
 app.listen(5000, (req, res) => {
