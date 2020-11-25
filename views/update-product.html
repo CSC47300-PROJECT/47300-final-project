@@ -136,15 +136,15 @@
                         <label for="" style="padding-right: 5px;">upload new image: </label>
                         <input type="file" name="file">
                       </div>
-                      <div>
+                      <div class="input-box">
                         <label for="" style="padding-right: 32px;">Product Name: </label>
                         <input type="text" name="productName" value="{{ products.productName }}">
                       </div>
                       <div>
                         <label for=""style="padding-right: 62px;">Image Id: </label>
-                        <input type="text" name="img_id" value="{{ products.img_id }}" style="display: none;">
+                        <input  type="text" name="img_id" value="{{ products.img_id }}" style="display: none;">
                       </div>
-                      <div>
+                      <div class="input-box">
                         <label for="" style="padding-right: 20px;">Product Species: </label>
                         <select name="species" id="">
                           <option value="{{products.species}}">{{products.species}}</option>
@@ -154,19 +154,19 @@
                           <option value="Beverage">Beverage</option>
                         </select>
                       </div>
-                      <div>
+                      <div class="input-box">
                         <label for="" style="padding-right: 98px;">Price: </label>
-                        <input type="text" name="price" value="{{ products.price}}">
+                        <input  type="text" name="price" value="{{ products.price}}">
                       </div>
-                      <div>
+                      <div class="input-box">
                         <label for="" style="padding-right: 51px;">Net Weight: </label>
                         <input type="text" name="netweight" value="{{ products.netweight }}">
                       </div>
-                      <div>
+                      <div class="input-box">
                         <label for="" style="padding-right: 73px;">Amount: </label>
                         <input type="number" name="amount" value="{{ products.amount }}">
                       </div>
-                      <div>
+                      <div class="input-box">
                         <label for="" style="padding-right: 99px;">Sold: </label>
                         <input type="number" name="sold" value="{{ products.sold }}">
                       </div>

@@ -592,7 +592,28 @@ padding:0 50px 0 50px;
     border-radius: 30px;
     }
 
-     /* -------------------Seccess------------------ */
-     .show-success{
+ /* -------------------Seccess------------------ */
+   .show-success{
        text-align:center;
      }
+ /* -------------------------checkout-box--------------- */
+.checkout-box{
+  text-align:center;
+  
+}
+.checkout-title{
+   background: -webkit-linear-gradient( #06c5ff,#10ffc3);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+      text-align:center;
+      margin:20px;
+}
+
+.input-box input{
+margin-bottom: 15px;
+ border:none;
+ border-bottom:1px solid #c9c5c5;
+ outline:none;
+ background:none;
+} 
+

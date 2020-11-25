@@ -22,7 +22,7 @@
     <script src="https://kit.fontawesome.com/1d299bbc93.js" crossorigin="anonymous"></script>
     <script src="node_modules/jquery/dist/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="css/style.css" />
-    <!-- <link rel="stylesheet" type="text/css" href="/public/css/Style.css" /> -->
+    <link rel="stylesheet" type="text/css" href="/public/css/Style.css" />
 </head>
 <body>
 <header>
@@ -113,11 +113,11 @@
             </div>
             {{ /if }}
             <form action="/upload-product" method="POST" enctype="multipart/form-data">
-                <div>
+                <div class="input-box">
                     <label  style="padding-right: 18px;" for="">Product Name:</label>
                      <input style="margin-right: 3px;" type="text" name="productName">
                 </div>
-               <div style="padding-right: 80px;">
+               <div  class="input-box" style="padding-right: 80px;">
                 <label style="padding-right: 7px;" for="">Product Species:</label>
                 <select style="margin-right: 10px;" name="species" id="">
                     <option value="Fruit">Fruit</option>
@@ -127,17 +127,17 @@
                 </select>
                </div>
                 
-               <div>
+               <div class="input-box">
                 <label style="padding-right: 55px; margin-right: 7px;" for="">Amount:</label>
                 <input style="margin-right: 5px;" type="number" name="amount">
                </div>
 
-                <div >
+                <div class="input-box" >
                     <label style="padding-right: 84px; " for="">Price:</label>
                     <input  style ="" type="text" name="price">
                 </div>
 
-                <div>
+                <div class="input-box">
                     <label  style="padding-right: 36px; " for="">Net Weight:</label>
                     <input type="text" name="netweight">
                 </div>
