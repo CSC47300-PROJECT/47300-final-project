@@ -60,5 +60,41 @@
         {{ /if }}
       {{ /each }}
     </div>
+
+    <div class="show">
+      {{ each products }}
+        {{ if $value.species == 'Vegatable'}}
+        <div class='row'>
+          <div class="card card-body mb-3">
+            <a href="/modify-products/{{@ $value._id}}">
+            <img src="image/{{$value.img_id}}" alt="">
+            <div>{{ $value.productName }}</div> 
+            <div>${{ $value.price}}</div>  
+            <div> {{ $value.netweight}} </div> 
+            <div>Sold: {{ $value.sold }}</div>  
+           </a> 
+          </div> 
+        </div>   
+        {{ /if }}
+      {{ /each }}
+    </div>
+
+    <div class="show">
+      {{ each products }}
+        {{ if $value.species == 'Beverage'}}
+        <div class='row'>
+          <div class="card card-body mb-3">
+            <a href="/modify-products/{{@ $value._id}}">
+            <img src="image/{{$value.img_id}}" alt="">
+            <div>{{ $value.productName }}</div> 
+            <div>${{ $value.price}}</div>  
+            <div> {{ $value.netweight}} </div> 
+            <div>Sold: {{ $value.sold }}</div>  
+           </a> 
+          </div> 
+        </div>   
+        {{ /if }}
+      {{ /each }}
+    </div>
 </body>
 </html>

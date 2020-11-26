@@ -148,7 +148,7 @@ router.get("/order/success/:id", async (req, res) => {
         if (docs) {
           for (let j = 0; j < docs.length; j++) {
             if (docs[j].amount - productAmount <= 0) {
-              docs[j].amount = 'sold out'
+              docs[j].amount = 0
             } 
             else {
               docs[j].amount -= productAmount[j]
