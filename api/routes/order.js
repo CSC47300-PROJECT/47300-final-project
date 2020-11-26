@@ -22,24 +22,27 @@ const { session } = require('passport')
 const product = require('../../models/product')
 
 
-router.get('/cart', (req, res) => {
-  res.render('cart.html')
-})
+// router.get('/cart', (req, res) => {
+//   res.render('cart.html')
+// })
 
+// @route POST /
+// @desc POST shopping cart items
 router.post('/cart', (req, res) => {
-  console.log(req.body)
+  // console.log(req.body)
   let product = {product: req.body}
   Order.create(product, (err, orderList) => {
     if (err) {
       console.log(err)
     } else {
-      console.log(orderList._id)
+      // console.log(orderList._id)
       res.redirect(`/checkout/${orderList._id}`)
     }
   });
 });
 
-
+// @route GET /
+// @desc Display checkout page 
 router.get("/checkout/:id", (req, res) => {
   let orderId = req.params.id
   Order.findOne({_id:orderId}, (err, orderList) => {
@@ -61,13 +64,15 @@ router.get("/checkout/:id", (req, res) => {
   })
 })
 
+// @route POST /
+// @desc Create stripe sessoon and rederict to stripe checkout page
 router.post('/create-session', async (req, res) => {
   let orderId = req.body[2]
-  console.log('orderId!!!:' ,orderId)
+  // console.log('orderId!!!:' ,orderId)
   let userinfo = req.body[1]
   let product = req.body[0]
   var products = []
-  console.log('images: :', product[0].price_data.product_data.images)
+  // console.log('images: :', product[0].price_data.product_data.images)
   for (let i = 0; i < product.length; i++) {
     products.push({
       productName : product[i].price_data.product_data.name,
@@ -96,42 +101,31 @@ router.post('/create-session', async (req, res) => {
       orderList.product.push(products[j])
     }  
   }
-  console.log('orderList', orderList)
+  // console.log('orderList', orderList)
   Order.findByIdAndUpdate(orderId, orderList, (err) => {
     if (err) {
       console.log(err)
     } 
   })
 
+  // console.log('body', req.body[0])
   const session = await stripe.checkout.sessions.create({
     payment_method_types: ['card'],
     line_items: 
       req.body[0],
-    // line_items: [
-    //   {
-    //     price_data: {
-    //       currency: 'usd',
-    //       product_data: {
-    //         name: 'Stubborn Attachments',
-    //         images: ['https://i.imgur.com/EHyR2nP.png'],
-    //       },
-    //       unit_amount: 2000,
-    //     },
-    //     quantity: 1,
-    //   },
-  
     mode: 'payment',
     success_url: `http://127.0.0.1:5000/order/success/${orderId}`,
     cancel_url: `http://127.0.0.1:5000/order/cancel/${orderId}`,
   });
-
+  
   res.json({ id: session.id });
-  console.log(session.id)
+  // console.log(session.id)
 });
 
-
+// @route GET /
+// @desc Display order success info and display item details agian
+// update Product.amount data base
 router.get("/order/success/:id", async (req, res) => {
-  console.log('success/orderId:', req.params.id)
   Order.findById(req.params.id, (err, orderList) => {
     if (err) {
       console.log(err)
@@ -141,6 +135,29 @@ router.get("/order/success/:id", async (req, res) => {
       var products = orderList.product
       var str = JSON.stringify(products)
       products = JSON.parse(str)
+      var productname = []
+      var productAmount = []
+      for (let i = 0; i < products.length; i++) {
+        productname.push(products[i].productName)
+        productAmount.push(products[i].quantity)
+      }
+      Product.find({'productName':{ $in:productname}}, (err, docs) => {
+        if (err) {
+          console.log(err)
+        }
+        if (docs) {
+          for (let j = 0; j < docs.length; j++) {
+            if (docs[j].amount - productAmount <= 0) {
+              docs[j].amount = 'sold out'
+            } 
+            else {
+              docs[j].amount -= productAmount[j]
+            }
+            docs[j].sold += productAmount[j]
+            docs[j].save()
+          }
+        }
+      })
       res.render('success.html', {
         products: products
       } )
@@ -150,8 +167,9 @@ router.get("/order/success/:id", async (req, res) => {
   })
 })
 
+// @route GET /
+// @desc Display cancel page
 router.get("/order/cancel/:id", (req, res) => {
-  console.log(req.params.id)
   res.render('cancel.html')
 })
 

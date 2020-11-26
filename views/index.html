@@ -142,6 +142,8 @@
               <h1 class="productsTitle">
                   Products
               </h1>
+              <!-- checkout btn -->
+              <button class="btn-lg" style="width: 500px;" id="checkout-button">Checkout</button>
               <div class="row">
                   <div class="col-4">
                           <img src="img/ASampleProduct.png" alt="">
@@ -161,6 +163,9 @@
               </div>
             </div>
     </main> 
+    
+   
+    {{orderId}}
     <!-- footer -->
     <footer>
       <div class = "container">
@@ -180,4 +185,45 @@
     <!-- footer end-->
     {{ /if }}
 </body>
+<script type="text/javascript">
+  // product data 
+    const data = [
+      {
+        productName: 'Pineapple',
+        img_id: '5f9cec3f3666763ec0b209b7',
+        unit_amount: 3000,  //price $30;  needs x 100
+        quantity: 2
+      },
+      {
+        productName: 'Live Lobster',
+        img_id: '5f9e50c8eb315849fc89be93',
+        unit_amount: 1000,
+        quantity: 3
+      },
+    ];
+    // Create an instance of the Stripe object with your publishable API key
+    var checkoutButton = document.getElementById("checkout-button");
+    checkoutButton.addEventListener("click", function (e) {
+      e.preventDefault();
+      fetch("/cart", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        redirect:"follow",
+        body: JSON.stringify(data)
+      })
+      .then(function (response) {
+          console.log(response);
+          console.log(response.url)
+          location.href= response.url;
+        })
+        .then(data => console.log(JSON.stringify(data)))
+        .catch(function (error) {
+          console.error("Error:", error);
+        });
+       
+
+    });
+  </script>
 </html>
