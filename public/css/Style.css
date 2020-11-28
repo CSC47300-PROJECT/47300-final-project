@@ -45,6 +45,35 @@
     float:left;
 } 
 
+
+.set-name{
+  padding: 15px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translateX(-50%) translateY(-50%);
+  -webkit-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+}
+
+.set-name h3{
+   background: -webkit-linear-gradient( #06c5ff,#10ffc3);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.set-name input{
+  border-bottom: solid 1px #999;
+}
+
+.top-sale{
+  height: 330px;
+  overflow: hidden;
+}
+
+
 /* For Login page */
 /* for entry information box */
 .form-box{
@@ -222,6 +251,11 @@ transition: 0.5s ;
     background-color: white;
 }
 
+.products-box img{
+  width: 100%;
+  height: 250px;
+}
+
 /* The line in the product title bottom */
 /* .productsTitle::after{
     content:'';
@@ -245,7 +279,7 @@ transition: 0.5s ;
     /* margin-bottom: 50px; */
 }
 
-.products-box .col-4 img{
+.products-box .col-3 img{
     width:100%;
     display: block;
     margin-left: auto;
@@ -296,7 +330,7 @@ transition: 0.5s ;
   min-height: 12rem;
   transition: var(--mainTransition);
 }
-.img-container:hover .product-img {
+.img-container:hover img {
   opacity: 0.5;
 }
 
@@ -616,4 +650,66 @@ margin-bottom: 15px;
  outline:none;
  background:none;
 } 
+
+#pay-info{
+  height:0px;
+  width: 0px;
+  overflow: hidden;
+}
+
+.show-item-info .col-3{
+  text-align: center;
+  
+}
+.show-item-info .row{
+  background-color: #fff;
+}
+.show-item-info img{
+  width: 70px;
+  height: 70px;
+  margin: 10px 0px;
+}
+
+.show-item-info #checkout-button{
+      background-color: #45ccb8;
+      font-weight: 500;
+      padding-right:51.5px;
+      border-radius:0px;
+      margin: 0px;
+      text-align: center;
+      /* padding: 0px; */
+      margin-left: 49.5px;
+      padding: 10px 0px;
+}
+#total-price{
+  margin-left: 20px;
+  font-weight: 500;
+}
+
+.d_item{
+margin: 0px 5px;
+}
+
+.p_item{
+margin: 0px 5px;
+}
+
+
+.d_item:hover{
+background: #E0E0E0;
+cursor: pointer;
+}
+
+.p_item:hover{
+background: #E0E0E0;
+cursor: pointer;
+}
+
+.show-item-info .item-info{
+  border-bottom: 1px solid rgb(221, 220, 220);
+}
+/* -------------search------------------- */
+.results span{
+
+}
 

@@ -12,8 +12,8 @@
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
     <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <script> src = "js/good.js"</script>
     <!-- <link rel="stylesheet" type="text/css" href="/public/css/Style.css" /> -->
-    <script scr="/public/js/products.js"></script>
     <title>products</title>
 </head>
 
@@ -29,24 +29,34 @@
   {{ /if }} -->
     <header>
         <!-- title -->
+          <!-- title -->
           <div class="container">
-              <div class ="row">
-                  <div class="col-md-4 col-sm-12">
-                      <h2 class = "my-md-3 site-title">473 Online Mall</h2>
-                  </div>
-                  <div class="col-md-4 col-sm-12 text-center"> </div>
-                  <div class="col-md-4 col-sm-12 right">
-                      <div class = "signup-login">
-                          <a href="./register">Register </a>
-                          /
-                          <a href="./login"> Login</a>
-                          /
-                          <a href="./logout"> Logout</a>
-                          /
-                          <span><i class="fas fa-shopping-cart"></i></span>
-                      </div>
-                  </div>
+            <div class="row">
+              <div class="col-md-4 col-sm-12">
+                <h2 class="my-md-3 site-title">473 Online Mall</h2>
               </div>
+              <div class="col-md-4 col-sm-12 text-center"> </div>
+              <div class="col-md-4 col-sm-12 right">
+                <div class="signup-login">
+                  <span id="userInfo">
+                    {{ info }}
+                    {{ if currentUser  }}
+                    <h6>Hello,{{ currentUser.username }}</h6>
+                    {{else}}
+                    <a href="./register">Register </a>
+                    /
+                    <a href="./login"> Login</a>
+                    /
+                    {{ /if }}
+          
+                  </span>
+          
+                  <a href="./logout"> Logout</a>
+          
+          
+                </div>
+              </div>
+            </div>
           </div>
           <!-- title end -->
           <!-- navbar -->
@@ -80,8 +90,8 @@
                         <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
                       </li>
                     </ul>
-                    <form class="form-inline my-2 my-lg-0">
-                      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                    <form class="form-inline my-2 my-lg-0" action="/search-product" method="POST">
+                      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="searchValue">
                       <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="fas fa-search"></i></button>
                     </form>
                   </div>
@@ -91,56 +101,12 @@
       </header>
       <!-- Featured Products -->
       <main>
-        <div class = "container product-section">
-          <div class="products-box">
-            <h1 class="productsTitle">
-              Products
-            </h1>
-          </div>  
-          
-          <div class="row">
-            <article class="product col-4">
-              <div class="img-container">
-                <img src="/public/img/ASampleProduct.png" alt="Product" class="product-img">
-                <button class="bag-btn" data-id="1">
-                  <i class="fas fa-shopping-cart"></i>
-                  add to cart
-                </button>
-              </div>
-              <h3>A product</h3>
-              <h4>$16.00</h4>
-            </article>
-
-            <article class="product col-4">
-              <div class="img-container">
-                <img src="/public/img/ASampleProduct.png" alt="Product" class="product-img">
-                <button class="bag-btn" data-id="1">
-                  <i class="fas fa-shopping-cart"></i>
-                  add to cart
-                </button>
-              </div>
-              <h3>A product</h3>
-              <h4>$16.00</h4>
-            </article>
-
-            <article class="product col-4">
-              <div class="img-container">
-                <img src="/public/img/ASampleProduct.png" alt="Product" class="product-img">
-                <button class="bag-btn" data-id="1">
-                  <i class="fas fa-shopping-cart"></i>
-                  add to cart
-                </button>
-              </div>
-              <h3>A product</h3>
-              <h4>$16.00</h4>
-            </article>
-          </div>
-
-            <!-- <div class="products-box">
+        <div class = "container d-flex justify-content-center">
+            <div class="products-box">
                 <h1 >
                      Products
                 </h1>
-                <div class="row">
+                <!-- <div class="row">
                     <div class="col-4">
                             <img src="/public/img/ASampleProduct.png" alt="">
                             <h4>Vans</h4>
@@ -192,42 +158,33 @@
                   </div>
               </div>
             </div> -->
+            <div class="row">
+              {{ if products }}
+              {{ each products }}
+              <!-- <div>{{ $value.productName }}</div>
+                              <div>{{ $value.price}}</div> -->
+              <div class="col-3">
+                <div class="img-container">
+                  <img class="item_photo" src="image/{{$value.img_id}}" alt="">
+                  <button class="bag-btn">
+                    <i class="fas fa-cart-plus"></i>
+                    add to bag
+                  </button>
+                  </div>
+               
+                <h5 class="item_name">{{ $value.productName }}</h5>
+                <p class="item_price">${{ $value.price}}</p>
+              </div>
+              {{/each}}
+              {{/if}}
+            </div>
             
         </div>
       </main>
-      <!-- cart -->
-      <div class="cart-overlay">
-        <div class="cart">
-              <span class="close-cart">
-                <i class="fas fa-window-close"></i>
-              </span>
-              <h2>Your cart</h2>
-              <div class="cart-content">
-                <div class="cart-item">
-                  <img src="/public/img/ASampleProduct.png" alt="">
-                
-                <div class="">
-                  <h4>a product</h4>
-                  <h5>$16.00</h5>
-                  <span class="remove-item">remove</span>
-                </div>
-                <div>
-                  <i class="fas fa-chevron-up"></i>
-                  <p class="item-amout">1</p>
-                  <i class="fas fa-chevron-down"></i>
-                </div>
-              </div>
-            </div>
-            <div class="cart-footer">
-              <h3>your tatal:$ <span class="cart-total">0</span></h3>
-              <button class="clear-cart banner-btn">clear cart</button>
-            </div>
-          </div>
-        </div>
-
-
-
-
+      
+       
+    
+      
       <!-- footer -->
     <footer>
         <div class = "container">
@@ -237,7 +194,7 @@
                    <p> <i class="fas fa-envelope-square"></i>Email:<a href ='ALEXLIJD@gmail.com'>AlexLijd@gmai.com</a><br>
                        <i class="fas fa-envelope-square"></i>Email:<a href ='yifengjin89@gmail.com '>yifengjin89@gmail.com </a><br>
                        <i class="fas fa-envelope-square"></i>Email:<a href ='xrainbin@gmail.com '>xrainbin@gmail.com </a><br>
-                       Address<p style="font-weight:normal;  font-family:Cabin,'Microsoft Yahei' !important; font-size:12px;"><span style="color:#c59d5f;">　The City College of New York
+                       Address<p style="font-weight:normal;  font-family:Cabin,'Microsoft Yahei' !important; font-size:12px;"><span style="color:#5e5d5c;">　The City College of New York
                         160 Convent Avenue New York, NY 10031</p>
                     </p>
                 </div>

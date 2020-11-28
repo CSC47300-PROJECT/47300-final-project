@@ -12,7 +12,7 @@
     <script src="node_modules/jquery/dist/jquery.min.js"></script>
     <title>register</title>
     <link rel="stylesheet" type="text/css" href="css/style.css" />
-    <!-- <link rel="stylesheet" type="text/css" href="/public/css/Style.css" /> -->
+    <link rel="stylesheet" type="text/css" href="/public/css/Style.css" />
 </head>
 <body>
   
@@ -67,10 +67,10 @@
                           <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
                         </li>
                       </ul>
-                      <form class="form-inline my-2 my-lg-0">
-                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="fas fa-search"></i></button>
-                      </form>
+                    <form class="form-inline my-2 my-lg-0" action="/search-product" method="POST">
+                      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="searchValue">
+                      <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="fas fa-search"></i></button>
+                    </form>
                     </div>
                   </nav>
             </div>

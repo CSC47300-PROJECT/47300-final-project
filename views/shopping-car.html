@@ -1,12 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-
-    <title>Add-Product</title>
+    <title>Shopping-car</title>
     <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
     <script src="/node_modules/jquery/dist/jquery.min.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
@@ -21,14 +18,14 @@
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
         crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/1d299bbc93.js" crossorigin="anonymous"></script>
-    <script src="node_modules/jquery/dist/jquery.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <!-- <link rel="stylesheet" type="text/css" href="css/style.css" /> -->
     <link rel="stylesheet" type="text/css" href="/public/css/Style.css" />
+    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <script src="/node_modules/jquery/dist/jquery.min.js"></script>
 </head>
-
 <body>
-    <header>
-        <!-- title -->
         <div class="container">
             <div class="row">
                 <div class="col-md-4 col-sm-12">
@@ -41,24 +38,18 @@
                             {{ info }}
                             {{ if currentUser  }}
                             <h6>Hello,{{ currentUser.username }}</h6>
-                            <a href="/success">
-                                <i class="fas fa-cart-plus">
-                                    <a href="./checkout"></a>
-                                </i> /
-                            </a>
-                            
                             {{else}}
                             <a href="./register">Register </a>
                             /
                             <a href="./login"> Login</a>
                             /
                             {{ /if }}
-                            
-                            </span>
-                            
-                            <a href="./logout"> Logout</a>
-
-
+        
+                        </span>
+        
+                        <a href="./logout"> Logout</a>
+        
+        
                     </div>
                 </div>
             </div>
@@ -67,13 +58,12 @@
         <!-- navbar -->
         <div class="container">
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
-
-                <button class="navbar-toggler" type="button" data-toggle="collapse"
-                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                    aria-label="Toggle navigation">
+        
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-
+        
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item active">
@@ -107,69 +97,55 @@
                 </div>
             </nav>
         </div>
-        <!-- navbar end-->
-    </header>
 
-    <main>
-        <div class="container d-flex justify-content-center">
-
-            <div class="add-product-box">
-                <h1>Add Product</h1>
-                {{if flash }}
-                <div style="text-align: center" class="alert alert-{{ flash.type }} flash">
-                    <button type="button" class="close" data-dismiss="alert"
-                        onclick="$('.flash').hide();">&times;</button>
-                    {{ flash.text }}
-                </div>
-                {{ /if }}
-                <form action="/upload-product" method="POST" enctype="multipart/form-data">
-                    <div class="input-box">
-                        <label style="padding-right: 18px;" for="">Product Name:</label>
-                        <input style="margin-right: 3px;" type="text" name="productName">
+        <div class="container">
+            
+                    <h3 style="margin-top:15px;">Update Product</h3>
+                
+            <div class="car-box">
+                    <div class="check showtag">
+                        <i class="showtag" onclick="checkAll()">√</i>
                     </div>
-                    <div class="input-box" style="padding-right: 80px;">
-                        <label style="padding-right: 7px;" for="">Product Species:</label>
-                        <select style="margin-right: 10px;" name="species" id="">
-                            <option value="Fruit">Fruit</option>
-                            <option value="Vegatable">Vegatable</option>
-                            <option value="Seafood">Seafood</option>
-                            <option value="Beverage">Beverage</option>
-                        </select>
+                    <div class="all showtag">
+                        All
                     </div>
-
-                    <div class="input-box">
-                        <label style="padding-right: 55px; margin-right: 7px;" for="">Amount:</label>
-                        <input style="margin-right: 5px;" type="number" name="amount">
+                    <div class="name showtag">
+                        Item Name
                     </div>
-
-                    <div class="input-box">
-                        <label style="padding-right: 84px; " for="">Price:</label>
-                        <input style="" type="text" name="price">
+                    <div class="price showtag">
+                        Price
                     </div>
-
-                    <div class="input-box">
-                        <label style="padding-right: 36px; " for="">Net Weight:</label>
-                        <input type="text" name="netweight">
+                    <div class="number showtag">
+                        Count
                     </div>
-
-                    <div style="margin-bottom: -20px;">
-                        <label for="">Description:</label>
+                    <div class="subtotal showtag">
+                        Price for items
                     </div>
-                    <div style="padding-left: 122px; ">
-                        <textarea name="desc" id="" cols="30" rows="10"></textarea>
+                    <div class="detele showtag">
+                        Delete
                     </div>
-
-
-
-                    <div><input type="file" name="file"></div>
-                    <button class="submit-btn" type="submit">submit</button>
-                </form>
+                
+                
+               
             </div>
 
+            <div class="calculate-sum">
+                <div class="total-price showtag ">Total: $<span id="show-cost">0</span></div>
+                <div id="check-out" class="showtag">CHECKOUT</div>
+            </div>
+
+
         </div>
-    </main>
 
 
+
+
+    
 </body>
+<script>
+    window.onload=function(){
 
+    }
+
+</script>
 </html>

@@ -1,20 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<<<<<<< HEAD
+
   <title>Modify Products</title>
   <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
   <script src="/node_modules/jquery/dist/jquery.min.js"></script>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
     integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+    crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+    crossorigin="anonymous"></script>
   <script src="https://kit.fontawesome.com/1d299bbc93.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
   <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
@@ -67,12 +71,12 @@
               <a href="./login"> Login</a>
               /
               {{ /if }}
-  
+
             </span>
-  
+
             <a href="./logout"> Logout</a>
-  
-  
+
+
           </div>
         </div>
       </div>
@@ -81,12 +85,12 @@
     <!-- navbar -->
     <div class="container">
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  
+
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
           aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-  
+
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
@@ -112,7 +116,8 @@
             </li>
           </ul>
           <form class="form-inline my-2 my-lg-0" action="/search-product" method="POST">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="searchValue">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"
+              name="searchValue">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="fas fa-search"></i></button>
           </form>
         </div>
@@ -122,57 +127,58 @@
   </header>
 
   <div class="modify-title">
-<h1>Modify products</h1>
+    <h1>Modify products</h1>
 
-{{ if flash }}
-<div style="text-align: center" class="alert alert-{{ flash.type }} flash">
-  {{ flash.text }}
-  <button type="button" class="close" data-dismiss="alert" onclick="$('.flash').hide();">&times;</button>
-</div>
-{{ /if }}
-
-  
-
-  <div class="container d-flex justify-content-center">
+    {{ if flash }}
+    <div style="text-align: center" class="alert alert-{{ flash.type }} flash">
+      {{ flash.text }}
+      <button type="button" class="close" data-dismiss="alert" onclick="$('.flash').hide();">&times;</button>
+    </div>
+    {{ /if }}
 
 
- 
-  <div class="show">
-    {{ each products }}
-      {{ if $value.species == 'Fruit'}}
-      <div class='row'>
-        <div class="card card-body mb-3">
-          <a href="/modify-products/{{@ $value._id}}">
-          <img src="image/{{$value.img_id}}" alt="">
-          <div>{{ $value.productName }}</div> 
-          <div>${{ $value.price}}</div>  
-          <div> {{ $value.netweight}} </div> 
-          <div>Sold: {{ $value.sold }}</div>  
-          </a>
-        </div> 
-      </div>   
-      
-      {{ /if }}
-    {{ /each }}
-  </div>
 
-    <div class="show">
-      {{ each products }}
+    <div class="container d-flex justify-content-center">
+
+
+
+      <div class="show">
+        {{ each products }}
+        {{ if $value.species == 'Fruit'}}
+        <div class='row'>
+          <div class="card card-body mb-3">
+            <a href="/modify-products/{{@ $value._id}}">
+              <img src="image/{{$value.img_id}}" alt="">
+              <div>{{ $value.productName }}</div>
+              <div>${{ $value.price}}</div>
+              <div> {{ $value.netweight}} </div>
+              <div>Sold: {{ $value.sold }}</div>
+            </a>
+          </div>
+        </div>
+
+        {{ /if }}
+        {{ /each }}
+      </div>
+
+      <div class="show">
+        {{ each products }}
         {{ if $value.species == 'Seafood'}}
         <div class='row'>
           <div class="card card-body mb-3">
             <a href="/modify-products/{{@ $value._id}}">
-            <img src="image/{{$value.img_id}}" alt="">
-            <div>{{ $value.productName }}</div> 
-            <div>${{ $value.price}}</div>  
-            <div> {{ $value.netweight}} </div> 
-            <div>Sold: {{ $value.sold }}</div>  
-           </a> 
-          </div> 
-        </div>   
+              <img src="image/{{$value.img_id}}" alt="">
+              <div>{{ $value.productName }}</div>
+              <div>${{ $value.price}}</div>
+              <div> {{ $value.netweight}} </div>
+              <div>Sold: {{ $value.sold }}</div>
+            </a>
+          </div>
+        </div>
         {{ /if }}
-      {{ /each }}
-    </div>
+        {{ /each }}
+      </div>
 
 </body>
+
 </html>
