@@ -69,7 +69,7 @@
 }
 
 .top-sale{
-  height: 330px;
+  height: 320px;
   overflow: hidden;
 }
 
@@ -352,6 +352,14 @@ transition: 0.5s ;
     margin-top: 30px;
     background-color: white;
 }
+
+.main_display{
+  height: 330px;
+}
+
+.display1{
+  height:310px;
+}
 /* end of product */
 /* start on cart ----------------------------------------*/
 .cart-overlay {
@@ -447,7 +455,7 @@ transition: 0.5s ;
 } 
 
 /*---------------- updata-product ----------------*/
-.upload-product h3{
+.upload-product h1{
   background: -webkit-linear-gradient( #06c5ff,#10ffc3);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -458,7 +466,7 @@ transition: 0.5s ;
 
 .product-img{
   height: 300px;
-  width: 300px;
+  width: 500px;
   margin-bottom: -300px;
   padding-left: 200px;
   text-align: left;
@@ -524,6 +532,7 @@ color:gray;
 /*-----------------modify-products-------------*/
 .modify-title{
 text-align: center;
+margin-top: 20px;
 }
 .modify-title h1{
   background: -webkit-linear-gradient( #06c5ff,#10ffc3);
@@ -575,6 +584,7 @@ padding:0 50px 0 50px;
 
     .calculate-sum{
       margin-top:15px;
+      height:45px;
       border:1px solid #e0e0e0;
     }
 
@@ -629,6 +639,14 @@ padding:0 50px 0 50px;
  /* -------------------Seccess------------------ */
    .show-success{
        text-align:center;
+     }
+
+     .show-success h1{
+       background: -webkit-linear-gradient( #06c5ff,#10ffc3);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+      text-align:center;
+      margin:20px;
      }
  /* -------------------------checkout-box--------------- */
 .checkout-box{
@@ -709,7 +727,12 @@ cursor: pointer;
   border-bottom: 1px solid rgb(221, 220, 220);
 }
 /* -------------search------------------- */
-.results span{
-
+.products-box h3{
+  
+   background: -webkit-linear-gradient( #06c5ff,#10ffc3);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+   margin:50px 0px;
+   
 }
 

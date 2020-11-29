@@ -19,7 +19,7 @@
   <script src="https://kit.fontawesome.com/1d299bbc93.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
   <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-  <link rel="stylesheet" type="text/css" href="css/style.css" />
+  <link rel="stylesheet" type="text/css" href="/css/style.css" />
   <link rel="stylesheet" type="text/css" href="/public/css/Style.css" />
   <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
   <script src="/node_modules/jquery/dist/jquery.min.js"></script>
@@ -106,6 +106,8 @@
   <!-- navbar end-->
   <div class="container">
     <div class="show-success">
+      <h1>We have received your order</h1>
+      <div class="dropdown-divider"></div>
       <section>
         <p>
           We appreciate your business! If you have any questions, please email
@@ -167,7 +169,7 @@
   function getAmount() {
     for (var j = 0; j < unit_p.length; j++) {
       var b = (Number(unit_p[j].innerText));
-      unit_p[j].innerText = b;
+      unit_p[j].innerText = b/100;
     }
 
     var sum = 0;

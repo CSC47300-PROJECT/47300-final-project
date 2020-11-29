@@ -50,11 +50,11 @@
             {{ info }}
             {{ if currentUser  }}
             <h6>Hello,{{ currentUser.username }}</h6>
-            <a href="/success">
+            
               <i class="fas fa-cart-plus">
                 <a href="./checkout"></a>
               </i> /
-            </a>
+            
             
             {{else}}
             <a href="./register">Register </a>
@@ -116,6 +116,7 @@
   <!-- navbar end-->
   <div class="container show-cancel">
     <h3>Cancel</h3>
+    <div class="dropdown-divider"></div>
     <section>
       <p>Forgot to add something to your cart? Shop around then come back to pay!</p>
     </section>
