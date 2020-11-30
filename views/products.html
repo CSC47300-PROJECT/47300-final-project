@@ -97,7 +97,8 @@
                   <a class="nav-link" href="./products">Products</a>
                 </li>
                 {{ info }}
-                {{ if currentUser  }}
+                {{ if currentUser }}
+                {{ if currentUser.username == 'admin' || currentUser.username == 'admin1' }}
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
@@ -107,10 +108,11 @@
                     <a class="dropdown-item" href="./modify-products">Modify products</a>
                     <a class="dropdown-item" href="./add-products">Add-Product</a>
                     <div class="dropdown-divider"></div>
-        
+                
                   </div>
                 </li>
-                {{ /if}}
+                {{ /if }}
+                {{ /if }}
         
               </ul>
               <form class="form-inline my-2 my-lg-0" action="/search-product" method="POST">
@@ -294,23 +296,23 @@
     var i_name = document.getElementsByClassName("item_name");
     var i_price = document.getElementsByClassName("item_price");
 
-
+    
     for (var i = 0; i < add_item_btn.length; i++) {
       (function (i) {
         add_item_btn[i].onclick = function () {
           var a = i_name[i].innerHTML;
-          var b = i_photo[i].scr;
+          var b = i_photo[i].src;
 
           data.push(
             {
               productName: String(a),
-              img_id: String(b),
+              img_id: String(b).substring(27),
               unit_amount: parseFloat(i_price[i].innerHTML) * 100,
               quantity: 1,
             },
           )
           alert(i_name[i].innerText+" has been added to your cart")
-          
+          console.log(String(b));
          
         }
       })(i)

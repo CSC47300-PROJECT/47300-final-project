@@ -104,7 +104,8 @@
               <a class="nav-link" href="./products">Products</a>
             </li>
             {{ info }}
-            {{ if currentUser  }}
+            {{ if currentUser }}
+            {{ if currentUser.username == 'admin' || currentUser.username == 'admin1' }}
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">
@@ -117,7 +118,8 @@
                 
               </div>
             </li>
-            {{ /if}}
+            {{ /if }}
+            {{ /if }}
            
           </ul>
           <form class="form-inline my-2 my-lg-0" action="/search-product" method="POST">
@@ -181,10 +183,12 @@
               <div class="col-3">
                 <div class="img-container">
                   <img class="item_photo" src="image/{{$value.img_id}}" alt="">
+                  <a href="./products">
                   <button class="bag-btn">
-                    <i class="fas fa-cart-plus"></i>
-                    add to bag
+                      <i class="fas fa-cart-plus"></i>
+                      Go to Products Page
                   </button>
+                </a>
                 </div>
             
                 <h5 class="item_name">{{ $value.productName }}</h5>
@@ -228,30 +232,34 @@
 
 
 
-      var add_item_btn = document.getElementsByClassName("bag-btn");
-      var i_photo = document.getElementsByClassName("item_photo");
-      var i_name = document.getElementsByClassName("item_name");
-      var i_price = document.getElementsByClassName("item_price");
-
-      for (var i = 0; i < add_item_btn.length; i++) {
-          (function (i) {
-            add_item_btn[i].onclick = function () {
-              var a= i_name[i].innerText;
-              var b= i_photo[i].innerHTML;
+      // var add_item_btn = document.getElementsByClassName("bag-btn");
+      // var i_photo = document.getElementsByClassName("item_photo");
+      // var i_name = document.getElementsByClassName("item_name");
+      // var i_price = document.getElementsByClassName("item_price");
+      // console.log(i_photo);
+      // for (var i = 0; i < add_item_btn.length; i++) {
+      //     (function (i) {
+      //       add_item_btn[i].onclick = function () {
+      //         var a= i_name[i].innerText;
+      //         var b= i_photo[i].src;
               
-              data.push(
-                {
-                  productName: String(a),
-                  img_id: String(b),
-                  unit_amount: parseFloat(i_price[i].innerHTML) * 100,
-                  quantity: 1,
-                },
-              )
-              alert(i_name[i].innerText + " has been added to your cart")
-            }
-          })(i)
+      //         data.push(
+      //           {
+      //             productName: String(a),
+      //             img_id: String(b).substring(28),
+      //             unit_amount: parseFloat(i_price[i].innerHTML) * 100,
+      //             quantity: 1,
+      //           },
+      //         )
+      //         alert(i_name[i].innerText + " has been added to your cart")
+      //         console.log(b);
+      //         console.log(String(b).substring(28));
+              
+              
+      //       }
+      //     })(i)
 
-        }
+        // }
     
       
  
