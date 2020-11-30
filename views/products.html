@@ -23,8 +23,7 @@
   <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
   <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
   <link rel="stylesheet" type="text/css" href="css/style.css" />
-  <link rel="stylesheet" type="text/css" href="/public/css/Style.css" />
-  <script src="js/good.js"></script>
+  
 
     <!-- <link rel="stylesheet" type="text/css" href="/public/css/Style.css" /> -->
     <title>products</title>
@@ -32,14 +31,6 @@
 
 <body>
 
-  <!-- {{ if flash }}
-  <div style="text-align: center" class="alert alert-{{ flash.type }} flash">
-      {{ flash.text }}
-      <button type="button" class="close" data-dismiss="alert" onclick="$('.flash').hide();">&times;</button>
-  </div>
-  {{ else }}
-      222222
-  {{ /if }} -->
     <header>
         <!-- title -->
         <div class="container">
@@ -255,10 +246,6 @@
               {{/if}}
               {{/each}}
             </div>
-
-            
-
-            
             
             
         </div>
@@ -292,6 +279,7 @@
 
 
     var add_item_btn = document.getElementsByClassName("bag-btn");
+    console.log(add_item_btn)
     var i_photo = document.getElementsByClassName("item_photo");
     var i_name = document.getElementsByClassName("item_name");
     var i_price = document.getElementsByClassName("item_price");
