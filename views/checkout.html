@@ -106,14 +106,15 @@
               {{ /if }}
       
             </ul>
-            </form>
-            <form class="form-inline my-2 my-lg-0" action="/search-product" method="POST">
-              <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="searchValue">
-              <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="fas fa-search"></i></button>
             
-          </div>
+            <!-- <form class="form-inline my-2 my-lg-0" action="/search-product" method="POST">
+              <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="searchValue">
+              <button class="btn btn-outline-success my-2 my-sm-0"><i class="fas fa-search"></i></button>
+            </from>  -->
+             </div>
         </nav>
       </div>
+    </header>  
       <!-- navbar end-->
     <!-- stripe public key -->
     
@@ -127,23 +128,25 @@
         var orderId = '{{ orderId }}'
       </script>
     
+    
       <section>
-        <form class="needs-validation" novalidate>
+        
+      
         <div class="userInfo">
           <!-- if not user info, fill out user name,  -->
           <div class="input-box">
             <label for="">First Name:</label>
-            <input type="text" name="" id=""  required>
-            <div class="invalid-feedback"> Valid last name is required!</div>
+            <input type="text" name="" id="a"  required />
+            <!-- <div class="invalid-feedback"> Valid last name is required!</div> -->
           </div>
           <div class="input-box">
             <label for="">Last Name:</label>
-            <input type="text" name="" id="" required="required">
+            <input type="text" name="" id="b" required/>
           </div>
           <!-- otherwise -->
           <div class="input-box" style="margin-left: -50px;">
             <label for="">shipping Address:</label>
-            <input type="text" required="required">
+            <input type="text"  id="c" required />
           </div>
           <div style="margin-left: -23px;">
             <label for="">state:</label>
@@ -154,9 +157,10 @@
           </div>
           <div class="input-box" style="margin-right: -10px;">
             <label for="">Zip code:</label>
-            <input type="text"  pattern="[0-9]{5}" required="required" class="form-">
+            <input id="d" type="text"  pattern="[0-9]{5}"  class="form-" required />
           </div>
         </div>
+        
       
         <!-- <div class="product">
           <img src="https://i.imgur.com/EHyR2nP.png" alt="The cover of Stubborn Attachments" />
@@ -218,17 +222,21 @@
           
         </div>
         {{/each}}
+      <form action="">
         <div class="calculate-sum" >
           <div style="margin-left:700px; font-size: large;" id="total-price" class="showtag">Total: $<span id="show-cost">0</span></div>
           <button  style="position:absolute;" type="submit"  id="checkout-button" class="showtag">CHECKOUT</button>
         </div>
+      </form>
         
       </div>
         
       <p id="checkout_warning" style="text-align: center; color:red; font-weight: 500;"></p>
           
-        </form>
+       
       </section>
+    
+    
       
       
     </div>
@@ -369,20 +377,7 @@
 
   // product data 
     const userInfo = [{firstName: 'abc',lastName:'ABC', shippingAddress: '123st', state:'NY', city:'Queens', zip:'12345'}]
-     (function () {
-
-        var VForm = document.querySelectorAll('.needs-validation')
-        Array.prototype.slice.call(VForm)
-          .forEach(function (form) {
-            form.addEventListener('submit', function (event) {
-              if (!form.checkValidity()) {
-                event.preventDefault()
-                event.stopPropagation()
-              }
-              form.classList.add('was-validated')
-            }, false)
-          })
-      })()
+     
     
     
     // const data = [
