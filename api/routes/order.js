@@ -1,31 +1,24 @@
 const express = require('express')
 const Stripe = require('stripe')
 const dotenv = require('dotenv')
-<<<<<<< HEAD
-=======
+
 const bodyParser = require('body-parser')
->>>>>>> Jiande_Li
+
 // .env setup
 dotenv.config()
 
 // stripe api key set up
-<<<<<<< HEAD
-// const stripePublicKey = process.STRIPE_PUBLIC_KEY
-// const stripeSecretKey = process.STRIPE_SECRET_KEY
-=======
-const stripePublicKey = process.env.STRIPE_PUBLIC_KEY
+<
+
 const stripeSecretKey = process.env.STRIPE_SECRET_KEY
 
 const stripe = require('stripe')(stripeSecretKey);
->>>>>>> Jiande_Li
+
 
 // Create a router container
 const router = express.Router();
 
-<<<<<<< HEAD
-// importing User Schema
-const Product = require('../../models/product')
-=======
+
 // importing db Schema
 const Product = require('../../models/product')
 const Order = require('../../models/order')
