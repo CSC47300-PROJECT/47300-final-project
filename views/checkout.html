@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Buy cool new product</title>
+  <script src="https://polyfill.io/v3/polyfill.min.js?version=3.52.1&features=fetch"></script>
+  <!-- JS.stripe  -->
+  <script src="https://js.stripe.com/v3/"></script>
+  <script src="/node_modules/jquery/dist/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+    crossorigin="anonymous"></script>
+  <script src="https://kit.fontawesome.com/1d299bbc93.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+  <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+  <!-- <link rel="stylesheet" type="text/css" href="/public/css/Style.css" /> -->
+  <link rel="stylesheet" type="text/css" href="/css/Style.css" />
+  <script scr="js/good.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/js/bootstrap.bundle.min.js"
+    integrity="sha384-BOsAfwzjNJHrJ8cZidOg56tcQWfp6y72vEJ8xQ9w6Quywb24iOsW913URv1IS4GD" crossorigin="anonymous"></script>
+  
+</head>
+
+<body>
+
+  <header>
+      <!-- title -->
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4 col-sm-12">
+            <h2 class="my-md-3 site-title">473 Online Mall</h2>
+          </div>
+          <div class="col-md-4 col-sm-12 text-center"> </div>
+          <div class="col-md-4 col-sm-12 right">
+            <div class="signup-login">
+              <span id="userInfo">
+                {{ info }}
+                {{ if currentUser  }}
+                <h6>Hello,{{ currentUser.username }}</h6>
+      
+                <span  style=" margin: 0px; margin-right: 3px; background:none; width: 0%; padding: 0px;">
+                  <span><span class="fas fa-cart-plus"> <span>Shopping cart</span></span></span>
+                </span>/
+      
+                {{else}}
+                <span  style=" margin: 0px; margin-right: 3px; background:none; width: 0%; padding: 0px;">
+                  <span><span class="fas fa-cart-plus"> <span>Shopping cart</span></span></span>
+                </span>/
+                <a href="./register">Register </a>
+                /
+                <a href="./login"> Login</a>
+                /
+                {{ /if }}
+      
+              </span>
+      
+              <a href="./logout"> Logout</a>
+      
+      
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- title end -->
+      <!-- navbar -->
+      <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+      
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item active">
+                <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="./products">Products</a>
+              </li>
+              {{ info }}
+              {{ if currentUser }}
+              {{ if currentUser.username == 'admin' || currentUser.username == 'admin1' }}
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                  aria-haspopup="true" aria-expanded="false">
+                  Management Product
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="./modify-products">Modify products</a>
+                  <a class="dropdown-item" href="./add-products">Add-Product</a>
+                  <div class="dropdown-divider"></div>
+              
+                </div>
+              </li>
+              {{ /if }}
+              {{ /if }}
+      
+            </ul>
+            </form>
+            <form class="form-inline my-2 my-lg-0" action="/search-product" method="POST">
+              <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="searchValue">
+              <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="fas fa-search"></i></button>
+            
+          </div>
+        </nav>
+      </div>
+      <!-- navbar end-->
+    <!-- stripe public key -->
+    
+    <div class="checkout-box container">
+      <h1 class="checkout-title">
+        Check Out
+      </h1>
+      <div class="dropdown-divider"></div>
+      <script>
+        var stripePublicKey = '{{ publicKey }}'
+        var orderId = '{{ orderId }}'
+      </script>
+    
+      <section>
+        <form class="needs-validation" novalidate>
+        <div class="userInfo">
+          <!-- if not user info, fill out user name,  -->
+          <div class="input-box">
+            <label for="">First Name:</label>
+            <input type="text" name="" id=""  required>
+            <div class="invalid-feedback"> Valid last name is required!</div>
+          </div>
+          <div class="input-box">
+            <label for="">Last Name:</label>
+            <input type="text" name="" id="" required="required">
+          </div>
+          <!-- otherwise -->
+          <div class="input-box" style="margin-left: -50px;">
+            <label for="">shipping Address:</label>
+            <input type="text" required="required">
+          </div>
+          <div style="margin-left: -23px;">
+            <label for="">state:</label>
+            <select name="" id="">
+              <option value="" disabled selected hidden>Choose State</option>
+              <option value="NY">New York</option>
+            </select>
+          </div>
+          <div class="input-box" style="margin-right: -10px;">
+            <label for="">Zip code:</label>
+            <input type="text"  pattern="[0-9]{5}" required="required" class="form-">
+          </div>
+        </div>
+      
+        <!-- <div class="product">
+          <img src="https://i.imgur.com/EHyR2nP.png" alt="The cover of Stubborn Attachments" />
+          <div class="description">
+            <h3>Stubborn Attachments</h3>
+            <h5>$33.00</h5>
+          </div>
+        </div> -->
+        <!-- <div id=“pay-info”>
+      <div class="car-box">
+        <div class="check showtag">
+          <i class="showtag" onclick="checkAll()">√</i>
+        </div>
+        <div class="all showtag">
+          All
+        </div>
+        <div class="name showtag">
+          Item Name
+        </div>
+        <div class="price showtag">
+          Price
+        </div>
+        <div class="number showtag">
+          Count
+        </div>
+        <div class="subtotal showtag">
+          Price for items
+        </div>
+        <div class="detele showtag">
+          Delete
+        </div> -->
+
+      </div>
+      <div class="container show-item-info">
+        <div class="car-box">
+        <div class="row">
+        
+          <div class="col-3">Product</div>
+          <div class="col-3">
+               Photo
+        
+          </div>
+          <div class="col-3">Price</div>
+          <div class="col-3">Quantity</div>
+        
+        </div>
+        </div>
+        {{ each products }}
+        <div class="row item-info">
+          
+          <div class="col-3 product_name">{{ $value.productName}}</div>
+          <div class="col-3">
+            
+              <img class="p_photo" src="image/{{$value.img_id}}" alt="">
+            
+          </div>
+          <div class="col-3 unit_price">{{ $value.unit_amount }}</div>
+          <div class="col-3"><span style="font-weight: 500;" class="d_item">&nbsp-&nbsp</span><span style="margin:0px 10px" class="count_item">{{ $value.quantity }}</span><span class="p_item" style="font-weight: 500;">&nbsp+&nbsp</span></div> 
+          
+        </div>
+        {{/each}}
+        <div class="calculate-sum" >
+          <div style="margin-left:700px; font-size: large;" id="total-price" class="showtag">Total: $<span id="show-cost">0</span></div>
+          <button  style="position:absolute;" type="submit"  id="checkout-button" class="showtag">CHECKOUT</button>
+        </div>
+        
+      </div>
+        
+      <p id="checkout_warning" style="text-align: center; color:red; font-weight: 500;"></p>
+          
+        </form>
+      </section>
+      
+      
+    </div>
+  </body>
+  <script type="text/javascript">
+    var unit_p = document.getElementsByClassName("unit_price");
+    var count_i = document.getElementsByClassName("count_item");
+    var p_n=document.getElementsByClassName("product_name");
+    var i_p=document.getElementsByClassName("p_photo");
+
+
+    
+
+    const data = [
+        
+      ]
+
+       for (var w = 0; w < unit_p.length; w++) {
+          data.push(
+           {
+             price_data: {
+               currency: 'usd',
+               product_data: {
+                 name: String(p_n[w].innerHTML),
+                 images: ['img/ASampleProduct.png'],
+               },
+               unit_amount: Math.round(parseFloat(unit_p[w].innerHTML)*100)/100,  //price $30;  needs x 100
+             },
+             quantity: 1,
+           })}
+
+        var check_0 = function () {
+            if (Number(document.getElementById('show-cost').innerHTML)=== 0) {
+              document.getElementById('checkout-button').style.background="linear-gradient(to right,  #ff1074, #8f06ff)";
+              document.getElementById('checkout_warning').innerHTML="The total amount must be greater than 0 to checkout";
+            } else {
+              document.getElementById('checkout-button').style.background = "linear-gradient(to right,  #10ffc3, #06c5ff)";
+              document.getElementById('checkout_warning').innerHTML ='';
+            }
+          }
+       
+        var abcd=function(){for (var o = 0; o < i_p.length; o++) {
+          var s = String(i_p[o].src).substring(0, 21);
+          var r = String(i_p[o].src).substring(30,36);
+          var c = String(i_p[o].src).substr(37);
+          console.log(String(i_p[o].src));
+          i_p[o].src = s+r+c;
+          console.log(String(i_p[o].src));
+        }}
+        abcd();
+
+
+
+  function getAmount() {
+    for (var j = 0; j < unit_p.length; j++) {
+        var b = (Number(unit_p[j].innerText));
+        unit_p[j].innerText=b/100;
+      }
+    
+    var sum=0;
+    for (var k = 0; k < unit_p.length; k++) {
+        var b=(Number(unit_p[k].innerText));
+        var a=(Number(count_i[k].innerText));
+        sum+=(a*b);  
+        console.log(a);
+        console.log(b);
+        sum= Math.floor(sum * 100) / 100; 
+        }
+    document.getElementById("show-cost").innerText=sum;
+    console.log(sum);
+    
+      }
+  getAmount();
+  check_0();
+
+  function get_after_Amount() {
+      for (var j = 0; j < unit_p.length; j++) {
+        var b = (Number(unit_p[j].innerText));
+        unit_p[j].innerText = b;
+      }
+
+      var sum = 0;
+      for (var k = 0; k < unit_p.length; k++) {
+        var b = (Number(unit_p[k].innerText));
+        var a = (Number(count_i[k].innerText));
+        sum += (a * b);
+        sum = Math.floor(sum * 100) / 100;
+      }
+      document.getElementById("show-cost").innerText = sum;
+    }
+
+  var p_btn = document.getElementsByClassName("p_item");
+  //var d_btn = document.getElementsByClassName("d_item");
+  for (var i = 0; i< p_btn.length; i++) {
+
+
+    (function (i) {
+      p_btn[i].onclick = function () {
+        var a = parseInt(count_i[i].innerHTML);
+        ++a;
+        data[i].quantity =a;
+        count_i[i].innerHTML = a;
+        console.log(a);
+        get_after_Amount();
+        check_0();
+      }
+    })(i)
+    
+  
+
+  }
+
+  var d_btn = document.getElementsByClassName("d_item");
+    for (var i = 0; i < p_btn.length; i++) {
+      (function (i) {
+        d_btn[i].onclick = function () {
+          var a = parseInt(count_i[i].innerHTML);
+          if (a != 0) {
+            --a;
+            data[i].quantity=a;
+            count_i[i].innerHTML = a;
+          } else {
+            count_i[i].innerHTML = 0;
+          }
+          get_after_Amount();
+          check_0();
+        }
+        
+      })(i)
+     
+    }
+  
+ 
+
+
+
+
+
+  // product data 
+    const userInfo = [{firstName: 'abc',lastName:'ABC', shippingAddress: '123st', state:'NY', city:'Queens', zip:'12345'}]
+     (function () {
+
+        var VForm = document.querySelectorAll('.needs-validation')
+        Array.prototype.slice.call(VForm)
+          .forEach(function (form) {
+            form.addEventListener('submit', function (event) {
+              if (!form.checkValidity()) {
+                event.preventDefault()
+                event.stopPropagation()
+              }
+              form.classList.add('was-validated')
+            }, false)
+          })
+      })()
+    
+    
+    // const data = [
+    //     {
+    //       price_data: {
+    //         currency: 'usd',
+    //         product_data: {
+    //           name: 'Pineapple',
+    //           images: ['https://i.imgur.com/EHyR2nP.png'],
+    //         },
+    //         unit_amount: 3000,  //price $30;  needs x 100
+    //       },
+    //       quantity: 2,
+    //     },
+    //     {
+    //       price_data: {
+    //         currency: 'usd',
+    //         product_data: {
+    //           name: 'Live Lobster',
+    //           images: ['https://i.imgur.com/EHyR2n9.png'],
+    //         },
+    //         unit_amount: 1000,
+    //       },
+    //       quantity: 3,
+    //     },
+    //   ]
+    // Create an instance of the Stripe object with your publishable API key
+    // stripe public key
+    var stripe = Stripe(stripePublicKey);
+    var checkoutButton = document.getElementById("checkout-button");
+    checkoutButton.addEventListener("click", function (e) {
+      e.preventDefault();
+      fetch("/create-session", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify([data, userInfo, orderId])
+      })
+        .then(function (response) {
+          return response.json();
+        })
+        .then(function (session) {
+          return stripe.redirectToCheckout({ sessionId: session.id });
+        })
+        .then(function (result) {
+          // If redirectToCheckout fails due to a browser or network
+          // error, you should display the localized error message to your
+          // customer using error.message.
+          if (result.error) {
+            alert(result.error.message);
+          }
+        })
+        .catch(function (error) {
+          console.error("Error:", error);
+        });
+    });
+  </script>
+</html>

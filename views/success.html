@@ -1,0 +1,172 @@
+<html>
+
+<head>
+  <title>Thanks for your order!</title>
+  <script src="https://polyfill.io/v3/polyfill.min.js?version=3.52.1&features=fetch"></script>
+  <!-- JS.stripe  -->
+  <script src="node_modules/jquery/dist/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+    crossorigin="anonymous"></script>
+  <script src="https://kit.fontawesome.com/1d299bbc93.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+  <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="/css/style.css" />
+  <link rel="stylesheet" type="text/css" href="/public/css/Style.css" />
+  <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <script src="/node_modules/jquery/dist/jquery.min.js"></script>
+
+
+  <style>
+    img {
+      width: 150px;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- title -->
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4 col-sm-12">
+        <h2 class="my-md-3 site-title">473 Online Mall</h2>
+      </div>
+      <div class="col-md-4 col-sm-12 text-center"> </div>
+      <div class="col-md-4 col-sm-12 right">
+        <div class="signup-login">
+          <span id="userInfo">
+            {{ info }}
+            {{ if currentUser  }}
+            <h6>Hello,{{ currentUser.username }}</h6>
+            {{else}}
+            <a href="./register">Register </a>
+            /
+            <a href="./login"> Login</a>
+            /
+            {{ /if }}
+
+          </span>
+
+          <a href="./logout"> Logout</a>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- title end -->
+  <!-- navbar -->
+  <div class="container">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./products">Products</a>
+          </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0" action="/search-product" method="POST">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="searchValue">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="fas fa-search"></i></button>
+        </form>
+      </div>
+    </nav>
+  </div>
+  <!-- navbar end-->
+  <div class="container">
+    <div class="show-success">
+      <h1>We have received your order</h1>
+      <div class="dropdown-divider"></div>
+      <section>
+        <p>
+          We appreciate your business! If you have any questions, please email
+          <a href="mailto:orders@example.com">orders@example.com</a>.
+        </p>
+        <span>
+
+          <div class="container show-item-info">
+            <div class="car-box">
+              <div class="row">
+          
+                <div class="col-3">Product</div>
+                <div class="col-3">
+                  Photo
+          
+                </div>
+                <div class="col-3">Price</div>
+                <div class="col-3">Quantity</div>
+          
+              </div>
+            </div>
+            {{ each products }}
+            <div class="row item-info">
+          
+              <div class="col-3">{{ $value.productName}}</div>
+              <div class="col-3">
+          
+                <img src="image/{{$value.img_id}}" alt="">
+          
+              </div>
+              <div class="col-3 unit_price">{{ $value.unit_amount }}</div>
+              <div class="col-3">
+                <span style="margin:0px 10px"
+                  class="count_item">{{ $value.quantity }}</span>
+                 
+              </div>
+          
+            </div>
+            {{/each}}
+            <div class="calculate-sum">
+              <div style="margin-left:760px;" id="total-price" class="showtag">Total: $<span id="show-cost">0</span></div>
+             
+            </div>
+          
+          </div>
+        
+        </span>
+      </section>
+    </div>
+  </div>
+
+</body>
+<script type="text/javascript">
+  var unit_p = document.getElementsByClassName("unit_price");
+  var count_i = document.getElementsByClassName("count_item");
+
+
+
+  function getAmount() {
+    for (var j = 0; j < unit_p.length; j++) {
+      var b = (Number(unit_p[j].innerText));
+      unit_p[j].innerText = b/100;
+    }
+
+    var sum = 0;
+    for (var k = 0; k < unit_p.length; k++) {
+      var b = (Number(unit_p[k].innerText));
+      var a = (Number(count_i[k].innerText));
+      sum += (a * b);
+    }
+    document.getElementById("show-cost").innerText = sum;
+  }
+
+  getAmount();
+</script>
+
+</html>
